@@ -1,6 +1,6 @@
 #include<iostream>
 using namespace std;
-int maiin()
+int main()
 {
 	cout << "Hello";
 	cout << "123";
