@@ -53,7 +53,7 @@ int main()
 			//Powrót do strony g³ównej
 			if (!(mod == 0) && e.type == sf::Event::MouseButtonReleased && e.mouseButton.button == sf::Mouse::Right && e.mouseButton.x < 800 && e.mouseButton.x > 0 && e.mouseButton.y > 0 && e.mouseButton.y < 650)
 			{
-				mod == 0;
+				mod = 0;
 			}
 			if (mod == 0 && e.type == sf::Event::MouseButtonPressed && e.mouseButton.button == sf::Mouse::Left && e.mouseButton.x < 450 && e.mouseButton.x > 350 && e.mouseButton.y > 202 && e.mouseButton.y < 234)
 			{
@@ -147,7 +147,6 @@ int main()
 			board * plansza = new board(&window, 5);
 			plansza->rysuj();
 			break;
-
 		default:
 			break;
 		}
@@ -157,21 +156,7 @@ int main()
 		window.display();
 	}
 
-	RenderWindow window(VideoMode(800, 600), "okno");   //rozdielczos okna			
-	while (window.isOpen()) {
-		Event event;
-		while (window.pollEvent(event))
-		{
-			if (event.type == Event::Closed) {
-				window.close();		//event zamykajacy okno
-			}
-		}
-		window.clear();
 
-
-
-		window.display();
-	}
 
 
 	system("pause");
