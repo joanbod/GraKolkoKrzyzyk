@@ -1,33 +1,57 @@
 #include<iostream>
-#include<locale.h>
+#include <SFML/Graphics.hpp>
 #include "menu.h"
 
 using namespace std;
 
-Menu::Menu()
+
+Sprites::Sprites(string textureName, float x, float y,bool button)
+{
+	//Ustawienie pozycji sprite.
+	if (!setUpSprite(textureName))
+		return;
+	position = sf::Vector2f(x, y);
+	sprite.setPosition(position);
+	isButton = button;
+
+}
+
+Sprites::~Sprites()
 {
 
 }
 
-Menu::~Menu()
+bool Sprites::setUpSprite(string textureName)
+{
+	if (!texture.loadFromFile(textureName))
+		return 0;
+	texture.setSmooth(true);	//Wyg³adza brzegi
+	sprite.setTexture(texture);
+	return true;
+
+}
+
+Texts::Texts(wstring line,string fontfilename,int charactersize, float x, float y)
+{
+	if (!setUpText(fontfilename))
+		return;
+
+	text.setString(line);
+	text.setCharacterSize(charactersize);
+	text.setFillColor(sf::Color::White);
+	position = sf::Vector2f(x, y);
+	text.setPosition(position);
+}
+
+Texts::~Texts()
 {
 
 }
 
-void Menu::Starting_Menu()
+bool Texts::setUpText(string fontfilename)
 {
-	//setlocale(LC_CTYPE, "Polish");
-	cout << "Grafika koloko krzyzyk" << endl;
-	cout << "Start" << endl;
-	cout << "Jak grac?" << endl;
-}
-
-void Menu::how_to_play()
-{
-	
-	setlocale(LC_CTYPE, "Polish");		//Dodanie poolskich znaków.
-	cout << "Pierwszy nastêpuje wybór planszy. Nastêpnie wybierasz pomiêdzy dwoma trybami: gra z drugim graczem lub komputerem z okreœlonym poziomem zaawansowania. Kolejno nastêpuje wybór iloœci rozgrywek oraz elementu, którym bêdziesz graæ." << endl;
-	cout << "Zasady gry" << endl;
-	cout << "Gracze stawiaj¹ na przemian kó³ko i krzy¿yk d¹¿¹c do zajêcia trzech lub piêciu pól w jednej linii zgodnie z wybranym trybem gry. Wygrywa ten z graczy, któremu jako pierwszemu uda u³o¿yæ siê trzy znaki w jednej linii.";
-	//TODO: mo¿na dodaæ jakieœ grafiki??
+	if (!font.loadFromFile(fontfilename))
+		return 0;
+	text.setFont(font);
+	return true;
 }
