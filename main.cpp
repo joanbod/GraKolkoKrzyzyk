@@ -1,14 +1,17 @@
 #include<iostream>
-#include<locale.h>
 #include "menu.h"
 #include<vector>
 #include <SFML/Graphics.hpp>
+#include "board.h"
+
 
 using namespace std;
+using namespace sf;
 
 int main()
 {
-	setlocale(LC_CTYPE, "Polish");
+
+
 	//element mod odpowiada za wyswietlenie odpowiedniego okna mozna by to wlozyc do enum?
 	int mod = 0;
 	int choiceMode = 1;
@@ -141,6 +144,8 @@ int main()
 			break;
 			//Gra
 		case 4:
+			board * plansza = new board(&window, 5);
+			plansza->rysuj();
 			break;
 
 		default:
@@ -151,6 +156,23 @@ int main()
 
 		window.display();
 	}
+
+	RenderWindow window(VideoMode(800, 600), "okno");   //rozdielczos okna			
+	while (window.isOpen()) {
+		Event event;
+		while (window.pollEvent(event))
+		{
+			if (event.type == Event::Closed) {
+				window.close();		//event zamykajacy okno
+			}
+		}
+		window.clear();
+
+
+
+		window.display();
+	}
+
 
 	system("pause");
 	return 0;
