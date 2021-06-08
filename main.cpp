@@ -145,8 +145,8 @@ int main()
 			break;
 			//Gra
 		case 4:
-			board * plansza = new board(&window, 5);
-			plansza->rysuj();
+			/*board * plansza = new board(&window, 5);
+			plansza->rysuj();*/
 			break;
 		default:
 			break;
