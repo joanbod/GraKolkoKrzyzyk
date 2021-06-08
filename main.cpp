@@ -39,6 +39,10 @@ int main()
 	
 	sf::RenderWindow window(sf::VideoMode(800, 650, 32), "Pierwsze okno"/*, sf::Style::Fullscreen*/);
 	window.setVerticalSyncEnabled(true);
+
+	board* plansza_5 = new board(&window, 5);		//tworzenie plansz 3 na 3 i 5 na 5
+	board* plansza_3= new board(&window, 3);
+
 	while (window.isOpen())
 	{
 		
@@ -145,8 +149,7 @@ int main()
 			break;
 			//Gra
 		case 4:
-			/*board * plansza = new board(&window, 5);
-			plansza->rysuj();*/
+			plansza_5->rysuj();
 			break;
 		default:
 			break;
