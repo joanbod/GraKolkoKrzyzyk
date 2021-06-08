@@ -1,5 +1,2 @@
 oboiektowka.sln
-.vcxproj
-oboiektowka.vcxproj
-oboiektowka.vcxproj.filters
-oboiektowka.vcxproj.user
+*.vcxproj
