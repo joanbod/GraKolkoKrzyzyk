@@ -5,7 +5,12 @@ board::board(RenderWindow* okno, int a) {
 	window = okno;
 	int liczba_pol = rozmiar * rozmiar;
 	tab = new RectangleShape[liczba_pol];
-	tab_sore = new int[liczba_pol];
+	tab_score = new int[liczba_pol];
+
+	for (int i = 0; i < rozmiar; i++)
+	{
+		tab_score[i] = 0;
+	}
 
 }
 
@@ -29,7 +34,7 @@ void board::rysuj() {
 
 }
 
-void board::wstaw() {
+void board::wstaw(int x, int y, int kto) {
 
 }
 

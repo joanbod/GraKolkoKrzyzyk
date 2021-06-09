@@ -19,7 +19,7 @@ private:
 	RenderWindow* window;
 	int rozmiar;
 	RectangleShape* tab;
-	int* tab_score[];
+	int* tab_score;
 
 };
 
