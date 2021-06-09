@@ -28,17 +28,16 @@ int main()
 	//Sprites m3 = Sprites("images/start.png", 350, 300, true);
 
 	//£aduje czcionki
-	Texts o_x = Texts(L"O_X", "fonts/PressStart2P-Regular.ttf", 40,350,100);	//O_X na ka¿dej stronie
-	Texts startButton = Texts(L"Start", "fonts/PressStart2P-Regular.ttf", 32, 350, 160);
-	Texts instructionButton = Texts(L"Instrukcja", "fonts/PressStart2P-Regular.ttf", 32, 350, 202);
-	wstring instruction = L"ZASADY GRY\nGracze obejmuj¹ pola na przemian d¹¿¹c do objêcia trzech pól w jednej linii,\nprzy jednoczesnym uniemo¿liwieniu tego samego przeciwnikowi.\nPole mo¿e byæ objête przez jednego gracza i\nnie zmienia swego w³aœciciela przez ca³y przebieg gry.\n\nJAK GRAÆ?\n Po pierwsze wybierz planszê:\n\n3x3\n5x5\n\n nastêpnie wybierz swojego przeciwnika:\n\n-£atwy\n-Œredni\n-Zaawansowany\n-Ze znajomym\n\nKoñcowo wybierz iloœæ rozgrywek wybieraj¹c odpowiedni¹ liczbê.\n\nI najwa¿niejsze pamiêtaj o dobrej zabawie.";
+	Texts o_x = Texts(L"O_X", "fonts/PressStart2P-Regular.ttf", 60,305,50);	//O_X na każdej stronie
+	Texts startButton = Texts(L"Start", "fonts/PressStart2P-Regular.ttf", 42, 300, 240);
+	Texts instructionButton = Texts(L"Instrukcja", "fonts/PressStart2P-Regular.ttf", 42, 220, 330);
+	wstring instruction = L"ZASADY GRY\nGracze obejmują pola na przemian dążąc do objęcia trzech pól w jednej linii,\nprzy jednoczesnym uniemożliwieniu tego samego przeciwnikowi.\nPole może być objęte przez jednego gracza i\nnie zmienia swego właściciela przez cały przebieg gry.\n\nJAK GRAĆ?\n Po pierwsze wybierz planszę:\n\n3x3\n5x5\n\n następnie wybierz swojego przeciwnika:\n\n-Łatwy\n-Średni\n-Zaawansowany\n-Ze znajomym\n\nKońcowo wybierz ilość rozgrywek wybierając odpowiednią liczbę.\n\nI najważniejsze pamiętaj o dobrej zabawie.";
 	Texts instructionText = Texts(instruction, "fonts/Quicksand-VariableFont_wght.ttf", 16, 100, 160);
-	Texts chooseGameBoard = Texts(L"PLANSZA", "fonts/PressStart2P-Regular.ttf", 22, 350, 160);
-	Texts chooseGameMode = Texts(L"TRYB GRY", "fonts/PressStart2P-Regular.ttf", 22, 350, 192);
-	Texts chooseAmountOfGames = Texts(L"LICZBA ROZGRYWEK", "fonts/PressStart2P-Regular.ttf", 22, 350, 234);
+	Texts chooseGameBoard = Texts(L"PLANSZA", "fonts/PressStart2P-Regular.ttf", 40, 310, 150);
+	Texts chooseGameMode = Texts(L"TRYB GRY", "fonts/PressStart2P-Regular.ttf", 40, 310, 150);
+	Texts chooseAmountOfGames = Texts(L"LICZBA ROZGRYWEK", "fonts/PressStart2P-Regular.ttf", 40, 310, 150);
 	Texts threeXthree = Texts(L"3 x 3", "fonts/PressStart2P-Regular.ttf", 32, 360, 250);
 	Texts fiveXfive = Texts(L"5 x 5", "fonts/PressStart2P-Regular.ttf", 32, 360, 310);
-	Texts goBackButton = Texts(L"BACK", "fonts/PressStart2P-Regular.ttf", 14, 740, 20);
 	
 	sf::RenderWindow window(sf::VideoMode(800, 650, 32), "Pierwsze okno"/*, sf::Style::Fullscreen*/);
 	window.setVerticalSyncEnabled(true);
