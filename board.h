@@ -7,19 +7,24 @@
 using namespace std;
 using namespace sf;
 
-class board
+class Board
 {
 public:
-	board(RenderWindow* window, int rozmiar);
+	Board(RenderWindow* window, int rozmiar);
 	void rysuj();
-	~board();
+	/*Sprawdza czy ktoœ wygra³.*/
+	bool checkIfWin();
+	void wstaw(int x, int y, int kto);   // 1-kolko    2-krzyzyk
+	~Board();
 
 private:
 	RenderWindow* window;
 	int rozmiar;
 	RectangleShape* tab;
-	
+	int* tab_score;
+
 };
+
 
 
 
