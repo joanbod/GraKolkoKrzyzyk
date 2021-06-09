@@ -37,7 +37,64 @@ void board::rysuj() {
 void board::wstaw(int x, int y, int kto) {
 
 }
+//mpże jako int aby zwracał co wygrało?
 
+bool Board::checkIfWin()
+{
+	/*W zależności od rozmiaru musza zostac spełnione odpowiednie warunki.*/
+	if (rozmiar == 3)
+	{
+		/*Sprawdza elementy w kolejnych wierszach czy są takie same.*/
+		for (int i = 0; i < rozmiar * rozmiar; i += 3)
+		{
+			if (tab_score[i] == tab_score[i + 1] && tab_score[i] == tab_score[i + 2])
+				return true;
+		}
+		for (int i = 0; i < rozmiar; i++)
+		{
+			/*Sprawdza elementy w kolejnych kolumnach czy są takie same.*/
+			if (tab_score[i] == tab_score[i + 3] && tab_score[i] == tab_score[i + 6])
+				return true;
+			if (i == 0)
+			{	/*Sprawdza po ukosie czy elementy są takie same.*/
+				if (tab_score[i] == tab_score[i + 4] && tab_score[i] == tab_score[i + 8])
+					return true;
+			}
+			else if (i == 2)
+					if (tab_score[i] == tab_score[i + 2] && tab_score[i] == tab_score[i + 4])
+						return true;
+		}
+	}
+
+	else if (rozmiar == 5)
+	{
+		/*Sprawdza elementy w kolejnych wierszach czy są takie same.*/
+		for (int i = 0; i < rozmiar * rozmiar; i += 5)
+		{
+			if (tab_score[i] == tab_score[i + 1] && tab_score[i] == tab_score[i + 2] && tab_score[i] == tab_score[i + 3] && tab_score[i] == tab_score[i + 4])
+				return true;
+		}
+		/*Sprawdza elementy w kolejnych kolumnach czy są takie same.*/
+		for (int i = 0; i < rozmiar; i++)
+		{
+			if (tab_score[i] == tab_score[i + 5] && tab_score[i] == tab_score[i + 10] && tab_score[i] == tab_score[i + 15] && tab_score[i] == tab_score[i + 20])
+				return true;
+		}
+		/*Sprawdza po ukosie czy elementy są takie same.*/
+		for(int i=0;i<rozmiar;i+=4) 
+		{
+			if (i == 0)
+			{
+				if (tab_score[i] == tab_score[i + 6] && tab_score[i] == tab_score[i + 12] && tab_score[i] == tab_score[i + 18] && tab_score[i] == tab_score[i + 24])
+					return true;
+			}
+			else if (i == 4)
+					if (tab_score[i] == tab_score[i + 4] && tab_score[i] == tab_score[i + 8] && tab_score[i] == tab_score[i + 12] && tab_score[i] == tab_score[i + 16])
+						return true;
+		}
+	}
+	return false;
+}
 board::~board() {
 	delete[] tab;
 }
