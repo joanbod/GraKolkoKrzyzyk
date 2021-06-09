@@ -7,15 +7,15 @@
 using namespace std;
 using namespace sf;
 
-class board
+class Board
 {
 public:
-	board(RenderWindow* window, int rozmiar);
+	Board(RenderWindow* window, int rozmiar);
 	void rysuj();
 	/*Sprawdza czy ktoś wygrał.*/
 	bool checkIfWin();
 	void wstaw(int x,int y,int kto);   // 1-kolko    2-krzyzyk
-	~board();
+	~Board();
 
 private:
 	RenderWindow* window;

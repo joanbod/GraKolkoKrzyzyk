@@ -15,6 +15,7 @@ int main()
 
 	//element mod odpowiada za wyswietlenie odpowiedniego okna mozna by to wlozyc do enum?
 	int mod = 0;
+	int gracz = 1;
 	int choiceMode = 1;
 	vector<int> vecChoices;	//do zapisania trybow gry
 	enum class GameBoard {threexthree=1,fivexfive=2};
@@ -47,8 +48,8 @@ int main()
 	sf::RenderWindow window(sf::VideoMode(800, 650, 32), "Pierwsze okno"/*, sf::Style::Fullscreen*/);
 	window.setVerticalSyncEnabled(true);
 
-	board* plansza_5 = new board(&window, 5);		//tworzenie plansz 3 na 3 i 5 na 5
-	board* plansza_3= new board(&window, 3);
+	Board* plansza_5 = new Board(&window, 5);		//tworzenie plansz 3 na 3 i 5 na 5
+	Board* plansza_3= new Board(&window, 3);
 
 	while (window.isOpen())
 	{
@@ -117,6 +118,12 @@ int main()
 				//tutaj chhyba inputem jakims bedzie trzeba to zrobic
 				mod = 3;
 			}
+			else if (mod == 3 && vecChoices[0] == 1 && e.type == sf::Event::MouseButtonReleased && e.mouseButton.button == sf::Mouse::Left) {
+				plansza_3->wstaw(e.mouseButton.x, e.mouseButton.y, gracz);
+			}
+			else if (mod == 3 && vecChoices[0] == 2 && e.type == sf::Event::MouseButtonReleased && e.mouseButton.button == sf::Mouse::Left) {
+				plansza_5->wstaw(e.mouseButton.x, e.mouseButton.y, gracz);
+			}
 
 			//TODO: przycisk powrotu, mo¿e ma³e menu po najechaniu siê wysietla? przyciski wyboru gry bo rozpierdala to powoli.
 		}
@@ -166,7 +173,12 @@ int main()
 			break;
 			//Gra
 		case 3:
-			plansza_5->rysuj();
+			if (vecChoices[0] == 1) {
+				plansza_3->rysuj();
+			}
+			if (vecChoices[0] == 2) {
+				plansza_5->rysuj();
+			}
 			break;
 		default:
 			break;

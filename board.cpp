@@ -1,6 +1,6 @@
 #include "board.h"
 
-board::board(RenderWindow* okno, int a) {
+Board::Board(RenderWindow* okno, int a) {
 	rozmiar = a;
 	window = okno;
 	int liczba_pol = rozmiar * rozmiar;
@@ -14,8 +14,10 @@ board::board(RenderWindow* okno, int a) {
 
 }
 
-void board::rysuj() {
-	int x = 400 - (rozmiar * 80), y = 3;
+void Board::rysuj() {
+	int x{}, y{};
+	x = 400 - (rozmiar * 80 / 2);
+	y = 245 - (rozmiar * 80 / 2);
 	for (int i = 0; i < rozmiar * rozmiar; i++)
 	{
 		RectangleShape square(Vector2f(80.f, 80.f));
@@ -34,8 +36,38 @@ void board::rysuj() {
 
 }
 
-void board::wstaw(int x, int y, int kto) {
+void Board::wstaw(int x, int y, int kto) {// 1-kolko    2-krzyzyk
+	int x_poczatek = 440 - rozmiar * 80 / 2;
+	int y_poczatek = 325 - rozmiar * 80 / 2;
 
+	int x_koniec = x_poczatek + 80 * rozmiar;
+	int y_koniec = y_poczatek + 80 * rozmiar;
+
+	if (x > x_poczatek && x<x_koniec && y>y_poczatek && y < y_koniec)
+	{
+		int x_pocz_kwadrat = x_poczatek;
+		int y_pocz_kwadrat = y_poczatek;
+		int licznik = 0;
+		cout << "petla uruchomiona\n";
+		for (int i = 0; i < rozmiar; i++)
+		{
+			for (int j = 0; j < rozmiar; j++)
+			{
+				if (x > x_pocz_kwadrat && x<(x_pocz_kwadrat + 80) && y>y_pocz_kwadrat && y < (y_pocz_kwadrat + 80)) {
+					if (tab_score[licznik] == 0)
+					{
+						tab_score[licznik] = kto;
+						cout << "kliknieto na " << licznik << " kwadrat";
+					}
+					break;
+				}
+				x_pocz_kwadrat += 80;
+				licznik++;
+			}
+			x_pocz_kwadrat = x_poczatek;
+			y_pocz_kwadrat += 80;
+		}
+	}
 }
 //mpże jako int aby zwracał co wygrało?
 
@@ -95,6 +127,7 @@ bool Board::checkIfWin()
 	}
 	return false;
 }
-board::~board() {
+Board::~Board() {
 	delete[] tab;
+	delete[] tab_score;
 }
