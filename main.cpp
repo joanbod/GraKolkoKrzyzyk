@@ -34,11 +34,21 @@ int main()
 	wstring instruction = L"ZASADY GRY\nGracze obejmuj¹ pola na przemian d¹¿¹c do objêcia trzech pól w jednej linii,\nprzy jednoczesnym uniemo¿liwieniu tego samego przeciwnikowi.\nPole mo¿e byæ objête przez jednego gracza i\nnie zmienia swego w³aœciciela przez ca³y przebieg gry.\n\nJAK GRAÆ?\n Po pierwsze wybierz planszê:\n\n3x3\n5x5\n\n nastêpnie wybierz swojego przeciwnika:\n\n-£atwy\n-Œredni\n-Zaawansowany\n-Ze znajomym\n\nKoñcowo wybierz iloœæ rozgrywek wybieraj¹c odpowiedni¹ liczbê.\n\nI najwa¿niejsze pamiêtaj o dobrej zabawie.";
 	Texts instructionText = Texts(instruction, "fonts/Quicksand-VariableFont_wght.ttf", 16, 100, 160);
 	Texts chooseGameBoard = Texts(L"PLANSZA", "fonts/PressStart2P-Regular.ttf", 40, 310, 150);
-	Texts chooseGameMode = Texts(L"TRYB GRY", "fonts/PressStart2P-Regular.ttf", 40, 310, 150);
-	Texts chooseAmountOfGames = Texts(L"LICZBA ROZGRYWEK", "fonts/PressStart2P-Regular.ttf", 40, 310, 150);
 	Texts threeXthree = Texts(L"3 x 3", "fonts/PressStart2P-Regular.ttf", 32, 360, 250);
 	Texts fiveXfive = Texts(L"5 x 5", "fonts/PressStart2P-Regular.ttf", 32, 360, 310);
 
+	Texts chooseGameMode = Texts(L"TRYB GRY", "fonts/PressStart2P-Regular.ttf", 40, 280, 150);
+	Texts easy = Texts(L"³atwy", "fonts/PressStart2P-Regular.ttf", 32, 340, 220);
+	Texts medium = Texts(L"œredni", "fonts/PressStart2P-Regular.ttf", 32, 335, 270);
+	Texts advanced = Texts(L"trudny", "fonts/PressStart2P-Regular.ttf", 32, 335, 320);
+	Texts withAFriend = Texts(L"Ze znajomym", "fonts/PressStart2P-Regular.ttf", 32, 280, 370);
+
+	Texts chooseAmountOfGames = Texts(L"LICZBA ROZGRYWEK", "fonts/PressStart2P-Regular.ttf", 40, 310, 150);
+
+	sf::Font font;
+	font.loadFromFile("fonts/PressStart2P-Regular.ttf");
+
+	sf::Text text("", font);
 
 	Texts goBackButton = Texts(L"BACK", "fonts/PressStart2P-Regular.ttf", 14, 740, 20);
 
@@ -49,7 +59,7 @@ int main()
 	while (window.isOpen())
 	{
 		
-
+		sf::Uint32 unicode = 0;
 		sf::Event e;
 		while (window.pollEvent(e))
 		{
@@ -76,12 +86,12 @@ int main()
 				mod = 2;
 			}
 			//wybór trybu gr 3x3 albo 5x5
-			else if (mod == 2 && choiceMode == 1 && e.type == sf::Event::MouseButtonReleased && e.mouseButton.button == sf::Mouse::Left && e.mouseButton.x < 440 && e.mouseButton.x > 360 && e.mouseButton.y > 248 && e.mouseButton.y < 285)
+			else if (mod == 2 && choiceMode == 1 && e.type == sf::Event::MouseButtonReleased && e.mouseButton.button == sf::Mouse::Left && e.mouseButton.x < 560 && e.mouseButton.x > 360 && e.mouseButton.y > 248 && e.mouseButton.y < 285)
 			{
 				vecChoices.push_back(static_cast<int>(GameBoard::threexthree));
 				choiceMode = 2;
 			}
-			else if (mod == 2 && choiceMode == 1 && e.type == sf::Event::MouseButtonReleased && e.mouseButton.button == sf::Mouse::Left && e.mouseButton.x < 800 && e.mouseButton.x > 400 && e.mouseButton.y > 300 && e.mouseButton.y < 650)
+			else if (mod == 2 && choiceMode == 1 && e.type == sf::Event::MouseButtonReleased && e.mouseButton.button == sf::Mouse::Left && e.mouseButton.x < 550 && e.mouseButton.x > 350 && e.mouseButton.y > 300 && e.mouseButton.y < 340)
 			{
 				vecChoices.push_back(static_cast<int>(GameBoard::fivexfive));
 				choiceMode = 2;
@@ -107,11 +117,16 @@ int main()
 				vecChoices.push_back(static_cast<int>(GameMode::withAFriend));
 				choiceMode = 3;
 			}
+			else if (mod == 2 && choiceMode == 3 && e.type == sf::Event::TextEntered)
+			{
+				unicode = e.text.unicode;
+			}
 			else if (mod == 2 && choiceMode == 3 && e.type == sf::Event::MouseButtonReleased && e.mouseButton.button == sf::Mouse::Left && e.mouseButton.x < 800 && e.mouseButton.x > 400 && e.mouseButton.y < 650 && e.mouseButton.y > 300)
 			{
 				//tutaj chhyba inputem jakims bedzie trzeba to zrobic
 				mod = 3;
 			}
+
 
 			//TODO: przycisk powrotu, mo¿e ma³e menu po najechaniu siê wysietla? przyciski wyboru gry bo rozpierdala to powoli.
 		}
@@ -120,6 +135,12 @@ int main()
 		window.clear(sf::Color(10, 89, 93));
 		//TODO: Do osobnej funkjci to strzeliæ by trzeba by³o.
 	
+		if (unicode)
+		{
+			sf::String str = text.getString();
+			str += unicode;
+			text.setString(str);
+		}
 		switch (mod)
 		{
 			//G³ówne menu gry
@@ -148,11 +169,16 @@ int main()
 				break;
 			case 2:
 				window.draw(chooseGameMode.text);
+				window.draw(easy.text);
+				window.draw(medium.text);
+				window.draw(advanced.text);
+				window.draw(withAFriend.text);
 				
 				window.draw(goBackButton.text);
 				break;
 			case 3:
 				window.draw(chooseAmountOfGames.text);
+				window.draw(text);
 				window.draw(goBackButton.text);
 				//tu beda strza³ki w góre lub w dó³ do 10 ¿eby wybrac iloœæ rozgrywek
 				break;
@@ -161,7 +187,7 @@ int main()
 		}
 			break;
 			//Gra
-		case 4:
+		case 3:
 			plansza->rysuj();
 
 			break;
