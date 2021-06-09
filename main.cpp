@@ -160,7 +160,7 @@ int main()
 		}
 			break;
 			//Gra
-		case 4:
+		case 3:
 			plansza_5->rysuj();
 			break;
 		default:
