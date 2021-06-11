@@ -3,6 +3,11 @@
 #include<iostream>
 
 using namespace std;
+
+class GameMenu
+{
+
+};
 class Sprites
 {
 public:

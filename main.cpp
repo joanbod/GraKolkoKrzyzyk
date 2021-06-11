@@ -23,12 +23,13 @@ int main()
 	//m1.how_to_play();
 
 	//Elementy w menu g³ównym
-	//Sprites goBackButton = Sprites("images/backButtonWhite.png", 750, 50, true/*rozmiar 50X50*/);
+	Sprites amountButtonsUp = Sprites("images/buttonsAmountUp.png", 400, 230, true/*rozmiar 50X100*/);
+	Sprites amountButtonsDown = Sprites("images/buttonsAmountDown.png", 400, 340, true/*rozmiar 50X100*/);
 	//Sprites m2 = Sprites("images/start.png", 350, 200, true);
 	//Sprites m3 = Sprites("images/start.png", 350, 300, true);
 
 	//£aduje czcionki
-	Texts o_x = Texts(L"O_X", "fonts/PressStart2P-Regular.ttf", 60,305,50);	//O_X na ka¿dej stronie
+	Texts o_x = Texts(L"O_X", "fonts/PressStart2P-Regular.ttf", 60,315,100);	//O_X na ka¿dej stronie
 	Texts startButton = Texts(L"Start", "fonts/PressStart2P-Regular.ttf", 42, 300, 240);
 	Texts instructionButton = Texts(L"Instrukcja", "fonts/PressStart2P-Regular.ttf", 42, 220, 330);
 	wstring instruction = L"ZASADY GRY\nGracze obejmuj¹ pola na przemian d¹¿¹c do objêcia trzech pól w jednej linii,\nprzy jednoczesnym uniemo¿liwieniu tego samego przeciwnikowi.\nPole mo¿e byæ objête przez jednego gracza i\nnie zmienia swego w³aœciciela przez ca³y przebieg gry.\n\nJAK GRAÆ?\n Po pierwsze wybierz planszê:\n\n3x3\n5x5\n\n nastêpnie wybierz swojego przeciwnika:\n\n-£atwy\n-Œredni\n-Zaawansowany\n-Ze znajomym\n\nKoñcowo wybierz iloœæ rozgrywek wybieraj¹c odpowiedni¹ liczbê.\n\nI najwa¿niejsze pamiêtaj o dobrej zabawie.";
@@ -43,22 +44,29 @@ int main()
 	Texts advanced = Texts(L"trudny", "fonts/PressStart2P-Regular.ttf", 32, 335, 320);
 	Texts withAFriend = Texts(L"Ze znajomym", "fonts/PressStart2P-Regular.ttf", 32, 280, 370);
 
-	Texts chooseAmountOfGames = Texts(L"LICZBA ROZGRYWEK", "fonts/PressStart2P-Regular.ttf", 40, 310, 150);
+	Texts chooseAmountOfGames = Texts(L"LICZBA ROZGRYWEK", "fonts/PressStart2P-Regular.ttf", 40, 80, 150);
+	int i_amount = 1;
+	wstring w_amount = to_wstring(i_amount);
+	Texts amountOfGames = Texts(w_amount, "fonts/PressStart2P-Regular.ttf", 38, 405, 295);
 
-	sf::Font font;
-	font.loadFromFile("fonts/PressStart2P-Regular.ttf");
+	Texts o_sign = Texts(L"O", "fonts/PressStart2P-Regular.ttf", 40, 310, 150);
+	Texts x_sign = Texts(L"x", "fonts/PressStart2P-Regular.ttf", 40, 310, 150);
 
-	sf::Text text("", font);
+	
+
 
 	Texts goBackButton = Texts(L"BACK", "fonts/PressStart2P-Regular.ttf", 14, 740, 20);
 
 	sf::RenderWindow window(sf::VideoMode(800, 650, 32), "Pierwsze okno"/*, sf::Style::Fullscreen*/);
 	
 	window.setVerticalSyncEnabled(true);
-	board* plansza = new board(&window, 5);
+	Board* plansza = new Board(&window, 5);
 	while (window.isOpen())
 	{
-		
+		for (int i = 0; i < vecChoices.size(); i++)
+		{
+			cout << vecChoices[i] << endl;
+		}
 		sf::Uint32 unicode = 0;
 		sf::Event e;
 		while (window.pollEvent(e))
@@ -71,8 +79,33 @@ int main()
 			//Powrót do strony g³ównej
 			if (!(mod == 0) && e.type == sf::Event::MouseButtonReleased && e.mouseButton.button == sf::Mouse::Left && e.mouseButton.x < 800 && e.mouseButton.x > 740 && e.mouseButton.y > 0 && e.mouseButton.y < 40)
 			{
-				mod = 0;
-				choiceMode = 1;
+				
+				if (mod == 2 && choiceMode == 1)
+				{
+					mod = 0;
+					vecChoices.clear();
+				}
+				else if (mod == 2 && choiceMode == 3)
+				{
+					//TODO:nIE CHCE TUTAJ WRÓCIÆ DO POPRZEDNIEGO OKNA 
+					choiceMode = 2;
+					vecChoices.pop_back();
+				}
+				else if (mod == 2 && choiceMode == 2)
+				{
+					choiceMode = 1;
+					vecChoices.pop_back();
+				}
+				else if (mod == 3)
+				{
+					mod--;
+					vecChoices.pop_back();
+				}
+				else
+					mod--;
+					
+					
+
 				//TODO: mo¿na tu zrobiæ powrót do poprzedniej storny mod--
 			}
 			if (mod == 0 && e.type == sf::Event::MouseButtonReleased && e.mouseButton.button == sf::Mouse::Left && e.mouseButton.x < 640 && e.mouseButton.x > 210 && e.mouseButton.y > 320 && e.mouseButton.y < 364)
@@ -117,13 +150,21 @@ int main()
 				vecChoices.push_back(static_cast<int>(GameMode::withAFriend));
 				choiceMode = 3;
 			}
-			else if (mod == 2 && choiceMode == 3 && e.type == sf::Event::TextEntered)
+			else if (i_amount != 15 && mod == 2 && choiceMode == 3 && e.type == sf::Event::MouseButtonReleased && e.mouseButton.button == sf::Mouse::Left && e.mouseButton.x < 455 && e.mouseButton.x > 395 && e.mouseButton.y < 285 && e.mouseButton.y > 225)
 			{
-				unicode = e.text.unicode;
+				i_amount++;
+				
 			}
-			else if (mod == 2 && choiceMode == 3 && e.type == sf::Event::MouseButtonReleased && e.mouseButton.button == sf::Mouse::Left && e.mouseButton.x < 800 && e.mouseButton.x > 400 && e.mouseButton.y < 650 && e.mouseButton.y > 300)
+			else if (i_amount!=1 && mod == 2 && choiceMode == 3 && e.type == sf::Event::MouseButtonReleased && e.mouseButton.button == sf::Mouse::Left && e.mouseButton.x < 455 && e.mouseButton.x > 395 && e.mouseButton.y < 395 && e.mouseButton.y > 335)
+			{
+				i_amount--;
+				
+				
+			}
+			else if (mod == 2 && choiceMode == 3 && e.type == sf::Event::MouseButtonReleased && e.mouseButton.button == sf::Mouse::Left && e.mouseButton.x < 515 && e.mouseButton.x > 320 && e.mouseButton.y < 500 && e.mouseButton.y > 460)
 			{
 				//tutaj chhyba inputem jakims bedzie trzeba to zrobic
+				vecChoices.push_back(i_amount);
 				mod = 3;
 			}
 
@@ -134,12 +175,16 @@ int main()
 
 		window.clear(sf::Color(10, 89, 93));
 		//TODO: Do osobnej funkjci to strzeliæ by trzeba by³o.
-	
-		if (unicode)
+		//Ustawia Start napis dla róznych ekranów.
+		if (mod == 2)
 		{
-			sf::String str = text.getString();
-			str += unicode;
-			text.setString(str);
+			startButton.text.setScale(sf::Vector2f(0.85f, 0.85f));
+			startButton.text.setPosition(sf::Vector2f(340, 460));
+		}
+		else 
+		{
+			startButton.text.setScale(sf::Vector2f(1.15f, 1.15f));
+			startButton.text.setPosition(sf::Vector2f(300, 240));
 		}
 		switch (mod)
 		{
@@ -178,7 +223,24 @@ int main()
 				break;
 			case 3:
 				window.draw(chooseAmountOfGames.text);
-				window.draw(text);
+				w_amount = to_wstring(i_amount);
+				amountOfGames.text.setString(w_amount);
+				if (i_amount > 9)
+					amountOfGames.text.setPosition(sf::Vector2f(390,295));
+				else
+					amountOfGames.text.setPosition(sf::Vector2f(405, 295));
+				window.draw(amountOfGames.text);
+				if(i_amount == 1)
+					window.draw(amountButtonsUp.sprite);
+				else if(i_amount == 15)
+					window.draw(amountButtonsDown.sprite);
+				else
+				{
+					window.draw(amountButtonsUp.sprite);
+					window.draw(amountButtonsDown.sprite);
+				}
+				
+				window.draw(startButton.text);
 				window.draw(goBackButton.text);
 				//tu beda strza³ki w góre lub w dó³ do 10 ¿eby wybrac iloœæ rozgrywek
 				break;

@@ -1,0 +1,2 @@
+C:\Users\nekoc\Source\Repos\programowanie\x64\Debug\oboiektowka.exe
+C:\Users\nekoc\Source\Repos\programowanie\x64\Debug\oboiektowka.pdb

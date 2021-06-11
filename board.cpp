@@ -42,6 +42,7 @@ void Board::wstaw(int x, int y, int kto)
 
 bool Board::checkIfWin()
 {
+	//TODO:Dodaæ warunek kiedy jest kompromis, ¿e ca³a tablica wype³niona a ¿aden z pni¿szych warunków nie jest spe³niony.
 	/*W zale¿noœci od rozmiaru musza zostac spe³nione odpowiednie warunki.*/
 	if (rozmiar == 3)
 	{
