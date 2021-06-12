@@ -1,4 +1,5 @@
 #include<iostream>
+#include <SFML/Window.hpp>
 #include "menu.h"
 #include"board.h"
 #include<vector>
@@ -15,6 +16,7 @@ int main()
 
 	//element mod odpowiada za wyswietlenie odpowiedniego okna mozna by to wlozyc do enum?
 	int mod = 0;
+	int gracz = 1;
 	int choiceMode = 1;
 	vector<int> vecChoices;	//do zapisania trybow gry
 	enum class GameBoard {threexthree=1,fivexfive=2};
@@ -22,11 +24,11 @@ int main()
 	
 	//m1.how_to_play();
 
+
 	//Elementy w menu g³ównym
 	Sprites amountButtonsUp = Sprites("images/buttonsAmountUp.png", 400, 230, true/*rozmiar 50X100*/);
 	Sprites amountButtonsDown = Sprites("images/buttonsAmountDown.png", 400, 340, true/*rozmiar 50X100*/);
-	//Sprites m2 = Sprites("images/start.png", 350, 200, true);
-	//Sprites m3 = Sprites("images/start.png", 350, 300, true);
+	
 
 	//£aduje czcionki
 	Texts o_x = Texts(L"O_X", "fonts/PressStart2P-Regular.ttf", 60,315,100);	//O_X na ka¿dej stronie
@@ -60,7 +62,11 @@ int main()
 	sf::RenderWindow window(sf::VideoMode(800, 650, 32), "Pierwsze okno"/*, sf::Style::Fullscreen*/);
 	
 	window.setVerticalSyncEnabled(true);
-	Board* plansza = new Board(&window, 5);
+
+
+	Board* plansza_5 = new Board(&window, 5);		//tworzenie plansz 3 na 3 i 5 na 5
+	Board* plansza_3= new Board(&window, 3);
+
 	while (window.isOpen())
 	{
 		for (int i = 0; i < vecChoices.size(); i++)
@@ -71,59 +77,64 @@ int main()
 		sf::Event e;
 		while (window.pollEvent(e))
 		{
+			
 			//obsluga zdarzenia
 			if (e.type == sf::Event::Closed || (e.type == sf::Event::KeyPressed && e.key.code == sf::Keyboard::Escape))
 			{
 				window.close();
 			}
+
 			//Powrót do strony g³ównej
-			if (!(mod == 0) && e.type == sf::Event::MouseButtonReleased && e.mouseButton.button == sf::Mouse::Left && e.mouseButton.x < 800 && e.mouseButton.x > 740 && e.mouseButton.y > 0 && e.mouseButton.y < 40)
-			{
-				
-				if (mod == 2 && choiceMode == 1)
-				{
-					mod = 0;
-					vecChoices.clear();
-				}
-				else if (mod == 2 && choiceMode == 3)
-				{
-					//TODO:nIE CHCE TUTAJ WRÓCIÆ DO POPRZEDNIEGO OKNA 
-					choiceMode = 2;
-					vecChoices.pop_back();
-				}
-				else if (mod == 2 && choiceMode == 2)
-				{
-					choiceMode = 1;
-					vecChoices.pop_back();
-				}
-				else if (mod == 3)
-				{
-					mod--;
-					vecChoices.pop_back();
-				}
-				else
-					mod--;
-					
+	if (!(mod == 0) && e.type == sf::Event::MouseButtonReleased && e.mouseButton.button == sf::Mouse::Left && e.mouseButton.x < 800 && e.mouseButton.x > 740 && e.mouseButton.y > 0 && e.mouseButton.y < 40)
+	{
+
+		if (mod == 2 && choiceMode == 1)
+		{
+			mod = 0;
+			vecChoices.clear();
+		}
+		//TODO:Nie chce powracaæ do pola choice mode 2 z choice mode 3
+		//else if (mod == 2 && choiceMode == 2)
+		//{
+		//	choiceMode = 1;
+		//	vecChoices.pop_back();
+		//}
+		//else if (mod == 2 && choiceMode == 3)
+		//{
+		//	//TODO:nIE CHCE TUTAJ WRÓCIÆ DO POPRZEDNIEGO OKNA 
+		//	choiceMode = 2;
+		//	mod = 2;
+		//	vecChoices.pop_back();
+		//}
+		else if (mod == 3)
+		{
+			mod--;
+			vecChoices.pop_back();
+		}
+		else
+			mod--;
+	}
 					
 
-				//TODO: mo¿na tu zrobiæ powrót do poprzedniej storny mod--
-			}
+
 			if (mod == 0 && e.type == sf::Event::MouseButtonReleased && e.mouseButton.button == sf::Mouse::Left && e.mouseButton.x < 640 && e.mouseButton.x > 210 && e.mouseButton.y > 320 && e.mouseButton.y < 364)
 			{
-				//Przejœcie do instrukcji.
+				//PrzejÅ›cie do instrukcji.
 				mod = 1;
 			}
 			else if (mod == 0 && e.type == sf::Event::MouseButtonReleased && e.mouseButton.button == sf::Mouse::Left && e.mouseButton.x < 510 && e.mouseButton.x > 290 && e.mouseButton.y < 300 && e.mouseButton.y > 230)
 			{
-				//Przejœcie do wyboru trybu gry.
+				//PrzejÅ›cie do wyboru trybu gry.
 				mod = 2;
 			}
+
 			//wybór trybu gr 3x3 albo 5x5
 			else if (mod == 2 && choiceMode == 1 && e.type == sf::Event::MouseButtonReleased && e.mouseButton.button == sf::Mouse::Left && e.mouseButton.x < 560 && e.mouseButton.x > 360 && e.mouseButton.y > 248 && e.mouseButton.y < 285)
 			{
 				vecChoices.push_back(static_cast<int>(GameBoard::threexthree));
 				choiceMode = 2;
 			}
+
 			else if (mod == 2 && choiceMode == 1 && e.type == sf::Event::MouseButtonReleased && e.mouseButton.button == sf::Mouse::Left && e.mouseButton.x < 550 && e.mouseButton.x > 350 && e.mouseButton.y > 300 && e.mouseButton.y < 340)
 			{
 				vecChoices.push_back(static_cast<int>(GameBoard::fivexfive));
@@ -155,11 +166,10 @@ int main()
 				i_amount++;
 				
 			}
-			else if (i_amount!=1 && mod == 2 && choiceMode == 3 && e.type == sf::Event::MouseButtonReleased && e.mouseButton.button == sf::Mouse::Left && e.mouseButton.x < 455 && e.mouseButton.x > 395 && e.mouseButton.y < 395 && e.mouseButton.y > 335)
+			else if (i_amount != 1 && mod == 2 && choiceMode == 3 && e.type == sf::Event::MouseButtonReleased && e.mouseButton.button == sf::Mouse::Left && e.mouseButton.x < 455 && e.mouseButton.x > 395 && e.mouseButton.y < 395 && e.mouseButton.y > 335)
 			{
 				i_amount--;
-				
-				
+
 			}
 			else if (mod == 2 && choiceMode == 3 && e.type == sf::Event::MouseButtonReleased && e.mouseButton.button == sf::Mouse::Left && e.mouseButton.x < 515 && e.mouseButton.x > 320 && e.mouseButton.y < 500 && e.mouseButton.y > 460)
 			{
@@ -168,12 +178,22 @@ int main()
 				mod = 3;
 			}
 
+			else if (mod == 3 && vecChoices[0] == 1 && e.type == sf::Event::MouseButtonReleased && e.mouseButton.button == sf::Mouse::Left) {
+				plansza_3->wstaw(e.mouseButton.x, e.mouseButton.y, gracz);
+			}
+			else if (mod == 3 && vecChoices[0] == 2 && e.type == sf::Event::MouseButtonReleased && e.mouseButton.button == sf::Mouse::Left) {
+				plansza_5->wstaw(e.mouseButton.x, e.mouseButton.y, gracz);
 
-			//TODO: przycisk powrotu, mo¿e ma³e menu po najechaniu siê wysietla? przyciski wyboru gry bo rozpierdala to powoli.
+			}
+
+
+
+			//TODO: przycisk powrotu, moÂ¿e maÂ³e menu po najechaniu siÃª wysietla? przyciski wyboru gry bo rozpierdala to powoli.
 		}
 
 
-		window.clear(sf::Color(10, 89, 93));
+
+		window.clear(sf::Color(0, 0, 0));
 		//TODO: Do osobnej funkjci to strzeliæ by trzeba by³o.
 		//Ustawia Start napis dla róznych ekranów.
 		if (mod == 2)
@@ -186,9 +206,10 @@ int main()
 			startButton.text.setScale(sf::Vector2f(1.15f, 1.15f));
 			startButton.text.setPosition(sf::Vector2f(300, 240));
 		}
+
 		switch (mod)
 		{
-			//G³ówne menu gry
+			//GÂ³Ã³wne menu gry
 		case 0:
 			window.draw(o_x.text);
 			window.draw(startButton.text);
@@ -201,7 +222,7 @@ int main()
 			window.draw(goBackButton.text);
 
 			break;
-			//Wybór trybu gry
+			//WybÃ³r trybu gry
 		case 2:
 		{
 			switch (choiceMode)
@@ -218,11 +239,13 @@ int main()
 				window.draw(medium.text);
 				window.draw(advanced.text);
 				window.draw(withAFriend.text);
+
 				
 				window.draw(goBackButton.text);
 				break;
 			case 3:
 				window.draw(chooseAmountOfGames.text);
+
 				w_amount = to_wstring(i_amount);
 				amountOfGames.text.setString(w_amount);
 				if (i_amount > 9)
@@ -242,7 +265,7 @@ int main()
 				
 				window.draw(startButton.text);
 				window.draw(goBackButton.text);
-				//tu beda strza³ki w góre lub w dó³ do 10 ¿eby wybrac iloœæ rozgrywek
+				//tu beda strza³ki w góre lub w dó³ do 15 ¿eby wybrac iloœæ rozgrywek
 				break;
 
 			}
@@ -250,8 +273,13 @@ int main()
 			break;
 			//Gra
 		case 3:
-			plansza->rysuj();
 
+			if (vecChoices[0] == 1) {
+				plansza_3->rysuj();
+			}
+			if (vecChoices[0] == 2) {
+				plansza_5->rysuj();
+			}
 			break;
 		default:
 			break;

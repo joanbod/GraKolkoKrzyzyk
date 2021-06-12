@@ -12,9 +12,11 @@ class Board
 public:
 	Board(RenderWindow* window, int rozmiar);
 	void rysuj();
+
 	/*Sprawdza czy ktoœ wygra³.*/
 	bool checkIfWin();
 	void wstaw(int x, int y, int kto);   // 1-kolko    2-krzyzyk
+
 	~Board();
 
 private:
