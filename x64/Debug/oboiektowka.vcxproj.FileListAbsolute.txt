@@ -1,2 +1,4 @@
 C:\Users\nekoc\Source\Repos\programowanie\x64\Debug\oboiektowka.exe
 C:\Users\nekoc\Source\Repos\programowanie\x64\Debug\oboiektowka.pdb
+C:\Users\wobro\source\repos\projekt_sobota\x64\Debug\oboiektowka.exe
+C:\Users\wobro\source\repos\projekt_sobota\x64\Debug\oboiektowka.pdb

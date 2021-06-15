@@ -12,6 +12,7 @@ class Board
 public:
 	Board(RenderWindow* window, int rozmiar);
 	void rysuj();
+	void rysuj_x_o();
 
 	/*Sprawdza czy ktoœ wygra³.*/
 	int checkIfWin();
@@ -24,6 +25,9 @@ private:
 	int rozmiar;
 	RectangleShape* tab;
 	int* tab_score;
+
+	int x_poczatek;    //poczatek od ktorego zaczyna sie plansza
+	int y_poczatek;
 
 };
 

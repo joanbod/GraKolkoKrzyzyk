@@ -1,2 +1,9 @@
-﻿  main.cpp
-  oboiektowka.vcxproj -> C:\Users\nekoc\Source\Repos\programowanie\x64\Debug\oboiektowka.exe
+﻿  board.cpp
+C:\Users\wobro\source\repos\projekt_sobota\board.cpp(27,18): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\wobro\source\repos\projekt_sobota\board.cpp(27,15): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\wobro\source\repos\projekt_sobota\board.cpp(92,82): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\wobro\source\repos\projekt_sobota\board.cpp(92,70): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\wobro\source\repos\projekt_sobota\board.cpp(96,82): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\wobro\source\repos\projekt_sobota\board.cpp(96,70): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\wobro\source\repos\projekt_sobota\board.cpp(184): warning C4715: "Board::checkIfWin”: niewszystkie ścieżki kodu zwracają wartość
+  oboiektowka.vcxproj -> C:\Users\wobro\Source\Repos\projekt_sobota\x64\Debug\oboiektowka.exe

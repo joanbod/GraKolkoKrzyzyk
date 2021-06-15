@@ -15,7 +15,7 @@ GameMenu::GameMenu(float x, float y, string windowName)
 	choiceMode = 1;
 	i_amount = 1;
 	gracz = 1;
-	vecChoices = { 0 };
+	vecChoices = {};
 }
 
 
@@ -65,17 +65,12 @@ void GameMenu::setUpMenu()
 	window->setVerticalSyncEnabled(true);
 
 	//Stworzenie plansz
-	/*Board* plansza_5 = new Board(&window, 5);		
-	Board* plansza_3 = new Board(&window, 3);*/
+	Board* plansza_5 = new Board(window, 5);		
+	Board* plansza_3 = new Board(window, 3);
 
 	//G³ówna pêtla gry
 	while (window->isOpen())
 	{
-		//TODO: To do usuniêcia, bo tylko sprawdza
-		for (int i = 0; i < vecChoices.size(); i++)
-		{
-			cout << vecChoices[i] << endl;
-		}
 		
 		Event e;
 
@@ -171,13 +166,12 @@ void GameMenu::setUpMenu()
 				mod = 3;
 			}
 
-			/*else if (mod == 3 && vecChoices[0] == 1 && e.type == sf::Event::MouseButtonReleased && e.mouseButton.button == sf::Mouse::Left) {
+			else if (mod == 3 && vecChoices[0] == 1 && e.type == sf::Event::MouseButtonReleased && e.mouseButton.button == sf::Mouse::Left) {
 				plansza_3->wstaw(e.mouseButton.x, e.mouseButton.y, gracz);
 			}
 			else if (mod == 3 && vecChoices[0] == 2 && e.type == sf::Event::MouseButtonReleased && e.mouseButton.button == sf::Mouse::Left) {
 				plansza_5->wstaw(e.mouseButton.x, e.mouseButton.y, gracz);
-
-			}*/
+			}
 
 
 
@@ -272,12 +266,14 @@ void GameMenu::setUpMenu()
 		//Gra
 		case 3:
 
-			/*if (vecChoices[0] == 1) {
+			if (vecChoices[0] == 1) {
 				plansza_3->rysuj();
+				plansza_3->rysuj_x_o();
 			}
 			if (vecChoices[0] == 2) {
 				plansza_5->rysuj();
-			}*/
+				plansza_5->rysuj_x_o();
+			}
 			window->draw(goBackButton.text);
 			break;
 		default:

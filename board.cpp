@@ -5,17 +5,12 @@ Board::Board(RenderWindow* okno, int a) {
 	window = okno;
 	int liczba_pol = rozmiar * rozmiar;
 	tab = new RectangleShape[liczba_pol];
-	tab_score = new int[liczba_pol];
-
-	for (int i = 0; i < rozmiar; i++)
-	{
-		tab_score[i] = 0;
-	}
-
+	tab_score = new int[liczba_pol] {};
+	 x_poczatek = 440 - rozmiar * 80 / 2;    //poczatek od ktorego zaczyna sie plansza
+	 y_poczatek = 325 - rozmiar * 80 / 2;
 }
 
 void Board::rysuj() {
-
 	int x{}, y{};
 	x = 400 - (rozmiar * 80 / 2);
 	y = 245 - (rozmiar * 80 / 2);
@@ -40,37 +35,76 @@ void Board::rysuj() {
 }
 
 void Board::wstaw(int x, int y, int kto) {// 1-kolko    2-krzyzyk
-	int x_poczatek = 440 - rozmiar * 80 / 2;
-	int y_poczatek = 325 - rozmiar * 80 / 2;
+	Texts shapeo = Texts(L"O", "fonts/PressStart2P-Regular.ttf", 20, 300, 100);
+	Texts shapex = Texts(L"x", "fonts/PressStart2P-Regular.ttf", 20, 300, 100);
 
 	int x_koniec = x_poczatek + 80 * rozmiar;
 	int y_koniec = y_poczatek + 80 * rozmiar;
 
 	if (x > x_poczatek && x<x_koniec && y>y_poczatek && y < y_koniec)
 	{
-		int x_pocz_kwadrat = x_poczatek;
-		int y_pocz_kwadrat = y_poczatek;
+		int x_aktualny = x_poczatek;
+		int y_aktualny = y_poczatek;
 		int licznik = 0;
 		cout << "petla uruchomiona\n";
 		for (int i = 0; i < rozmiar; i++)
 		{
 			for (int j = 0; j < rozmiar; j++)
 			{
-				if (x > x_pocz_kwadrat && x<(x_pocz_kwadrat + 80) && y>y_pocz_kwadrat && y < (y_pocz_kwadrat + 80)) {
+				
+				if (x > x_aktualny && x<(x_aktualny + 80) && y>y_aktualny && y < (y_aktualny + 80)) {
+					cout << tab_score[licznik];
 					if (tab_score[licznik] == 0)
 					{
-						tab_score[licznik] = kto;
 						cout << "kliknieto na " << licznik << " kwadrat";
+						
+						if (kto == 1) {
+							tab_score[licznik] = kto;
+						}
+						if (kto == 2) {
+							tab_score[licznik] = kto;
+						}
+					
+
 					}
 					break;
 				}
-				x_pocz_kwadrat += 80;
+				x_aktualny += 80;
 				licznik++;
 			}
-			x_pocz_kwadrat = x_poczatek;
-			y_pocz_kwadrat += 80;
+			x_aktualny = x_poczatek;
+			y_aktualny += 80;
 		}
 	}
+}
+
+
+void Board::rysuj_x_o() {
+	int x_aktualny = x_poczatek+23;
+	int y_aktualny = y_poczatek+23;
+	int licznik = 0;
+
+	for (int i = 0; i < rozmiar; i++)
+	{
+		for (int j = 0; j < rozmiar; j++)
+		{
+			if (tab_score[licznik] == 1) {
+				Texts shapeo = Texts(L"O", "fonts/PressStart2P-Regular.ttf", 40, x_aktualny, y_aktualny);
+				window->draw(shapeo.text);
+			}
+			if (tab_score[licznik] == 2) {
+				Texts shapex = Texts(L"x", "fonts/PressStart2P-Regular.ttf", 40, x_aktualny, y_aktualny);
+				window->draw(shapex.text);
+			}
+			x_aktualny += 80;
+			licznik++;
+		}
+		x_aktualny = x_poczatek+23;
+		y_aktualny += 80;
+	}
+	
+	
+
 
 }
 
