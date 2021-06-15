@@ -1,13 +1,35 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include<iostream>
+#include <SFML/Window.hpp>
 
 using namespace std;
+using namespace sf;
 
 class GameMenu
 {
+	//Okno aplikacji
+	RenderWindow* window;
+	//Wymiary okna
+	float x;
+	float y;
+	//Zmienne odpowiedzialne za poruszanie siê po grze
+	int mod;
+	int choiceMode;
+	int i_amount;
+	//TODO:Do czego to?
+	int gracz;
+	//Wektory odpowiedzialne za zapisanie wyborów gracza
+	vector<int> vecChoices;
+
+public:
+	GameMenu(float=800,float=650,string="Okno aplikacji");
+	virtual ~GameMenu();
+
+	void setUpMenu();
 
 };
+
 class Sprites
 {
 public:

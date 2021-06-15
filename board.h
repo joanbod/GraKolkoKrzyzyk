@@ -14,7 +14,7 @@ public:
 	void rysuj();
 
 	/*Sprawdza czy ktoœ wygra³.*/
-	bool checkIfWin();
+	int checkIfWin();
 	void wstaw(int x, int y, int kto);   // 1-kolko    2-krzyzyk
 
 	~Board();

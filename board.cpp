@@ -76,9 +76,14 @@ void Board::wstaw(int x, int y, int kto) {// 1-kolko    2-krzyzyk
 
 
 
-bool Board::checkIfWin()
+int Board::checkIfWin()
 {
-	/*W zale≈ºno≈õci od rozmiaru musza zostac spe≈Çnione odpowiednie warunki.*/
+	/*W zale≈ºno≈õci od rozmiaru musza zostac spe≈Çnione odpowiednie warunki.
+	result=0; brak dotychczasowej wygranej
+	result =1; wygrana
+	result=2 ; remis
+	
+	*/
 	if (rozmiar == 3)
 	{
 		/*Sprawdza elementy w kolejnych wierszach czy sƒÖ takie same.*/
@@ -86,22 +91,22 @@ bool Board::checkIfWin()
 		for (int i = 0; i < rozmiar * rozmiar; i += 3)
 		{
 			if (tab_score[i] == tab_score[i + 1] && tab_score[i] == tab_score[i + 2])
-				return true;
+				return 1;
 		}
 		for (int i = 0; i < rozmiar; i++)
 		{
 
 			/*Sprawdza elementy w kolejnych kolumnach czy sπ takie same.*/
 			if (tab_score[i] == tab_score[i + 3] && tab_score[i] == tab_score[i + 6])
-				return true;
+				return 1;
 			if (i == 0)
 			{	/*Sprawdza po ukosie czy elementy sπ takie same.*/
 				if (tab_score[i] == tab_score[i + 4] && tab_score[i] == tab_score[i + 8])
-					return true;
+					return 1;
 			}
 			else if (i == 2)
 					if (tab_score[i] == tab_score[i + 2] && tab_score[i] == tab_score[i + 4])
-						return true;
+						return 1;
 		}
 	}
 
@@ -111,14 +116,14 @@ bool Board::checkIfWin()
 		for (int i = 0; i < rozmiar * rozmiar; i += 5)
 		{
 			if (tab_score[i] == tab_score[i + 1] && tab_score[i] == tab_score[i + 2] && tab_score[i] == tab_score[i + 3] && tab_score[i] == tab_score[i + 4])
-				return true;
+				return 1;
 		}
 
 		/*Sprawdza elementy w kolejnych kolumnach czy sπ takie same.*/
 		for (int i = 0; i < rozmiar; i++)
 		{
 			if (tab_score[i] == tab_score[i + 5] && tab_score[i] == tab_score[i + 10] && tab_score[i] == tab_score[i + 15] && tab_score[i] == tab_score[i + 20])
-				return true;
+				return 1;
 		}
 
 		/*Sprawdza po ukosie czy elementy sπ takie same.*/
@@ -127,14 +132,21 @@ bool Board::checkIfWin()
 			if (i == 0)
 			{
 				if (tab_score[i] == tab_score[i + 6] && tab_score[i] == tab_score[i + 12] && tab_score[i] == tab_score[i + 18] && tab_score[i] == tab_score[i + 24])
-					return true;
+					return 1;
 			}
 			else if (i == 4)
 					if (tab_score[i] == tab_score[i + 4] && tab_score[i] == tab_score[i + 8] && tab_score[i] == tab_score[i + 12] && tab_score[i] == tab_score[i + 16])
-						return true;
+						return 1;
 		}
 	}
-	return false;
+	/*Rozwiπzanie do remisu.*/
+	for (int i = 0; i < rozmiar * rozmiar; i++)
+	{
+		if (tab_score[i] != 0)
+			return 2;
+		else
+			return 0;
+	}
 }
 Board::~Board() {
 	delete[] tab;
