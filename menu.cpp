@@ -192,6 +192,8 @@ void GameMenu::setUpMenu()
 				if (plansza_3->checkIfWin() != 0) {						//koniec tury
 					if (plansza_3->checkIfWin() == 1)punkty_gracz_1++;
 					if (plansza_3->checkIfWin() == 2)punkty_gracz_2++;
+					cout << "gracz nr1 ma " << punkty_gracz_1;
+					cout << "gracz nr2 ma " << punkty_gracz_2;
 					plansza_3->newGame();
 				}
 			}
@@ -302,11 +304,11 @@ void GameMenu::setUpMenu()
 		case 3:
 
 			if (vecChoices[0] == 1) {
-				plansza_3->rysuj();
+				plansza_3->rysuj(punkty_gracz_1,punkty_gracz_2);
 				plansza_3->rysuj_x_o();
 			}
 			if (vecChoices[0] == 2) {
-				plansza_5->rysuj();
+				plansza_5->rysuj(punkty_gracz_1, punkty_gracz_2);
 				plansza_5->rysuj_x_o();
 			}
 			window->draw(goBackButton.text);

@@ -10,8 +10,9 @@ Board::Board(RenderWindow* okno, int a) {
 	 y_poczatek = 325 - rozmiar * 80 / 2;
 }
 
-void Board::rysuj() {
+void Board::rysuj(int punkty_gracz_1, int punkty_gracz_2) {
 	int x{}, y{};
+
 	x = 400 - (rozmiar * 80 / 2);
 	y = 245 - (rozmiar * 80 / 2);
 
@@ -31,12 +32,18 @@ void Board::rysuj() {
 		window->draw(tab[i]);
 	}
 
+	//wyswietlanie napisow pod plansza
 
+	y += 100;
+	String napis_punkt1 = to_string(punkty_gracz_1);
+	String napis_punkt2 = to_string(punkty_gracz_2);
+	napis_punkt1 =  napis_punkt1 + " : " + napis_punkt2;
+	Texts napis1 = Texts(napis_punkt1, "fonts/PressStart2P-Regular.ttf", 50, 320, y);
+
+	window->draw(napis1.text);
 }
 
 void Board::wstaw(int x, int y, int kto) {// 1-kolko    2-krzyzyk
-	Texts shapeo = Texts(L"O", "fonts/PressStart2P-Regular.ttf", 20, 300, 100);
-	Texts shapex = Texts(L"x", "fonts/PressStart2P-Regular.ttf", 20, 300, 100);
 
 	int x_koniec = x_poczatek + 80 * rozmiar;
 	int y_koniec = y_poczatek + 80 * rozmiar;

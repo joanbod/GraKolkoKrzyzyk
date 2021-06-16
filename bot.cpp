@@ -18,7 +18,7 @@ Bot::Bot(Board& p, int tryb)
 	plansza = &p;
 }
 
-Bot::~Bot()
+ Bot::~Bot()
 {
 	delete plansza;
 }

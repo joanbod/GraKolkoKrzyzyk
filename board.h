@@ -8,11 +8,11 @@
 using namespace std;
 using namespace sf;
 
-class Board
+class Board 
 {
 public:
 	Board(RenderWindow* window, int rozmiar);
-	void rysuj();
+	void rysuj(int punkty_gracz_1,int punkty_gracz_2);
 	void rysuj_x_o();
 
 	/*Sprawdza czy ktoœ wygra³.*/
@@ -20,11 +20,9 @@ public:
 	void wstaw(int x, int y, int kto);   // 1-kolko    2-krzyzyk
 	void newGame();
 
-	~Board();
+	 ~Board();
 
-	friend class Easy;
-	friend class Medium;
-	friend class Advanced;
+	friend class Bot;
 
 private:
 	RenderWindow* window;
