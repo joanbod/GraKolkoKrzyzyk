@@ -17,8 +17,10 @@ class GameMenu
 	int mod;
 	int choiceMode;
 	int i_amount;
-	//TODO:Do czego to?
+	//zmienne odpowiedzialne za ture gracza i przyznawanie punktow
 	int gracz;
+		int punkty_gracz_1;
+		int punkty_gracz_2;
 	//Wektory odpowiedzialne za zapisanie wyborów gracza
 	vector<int> vecChoices;
 

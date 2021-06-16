@@ -16,6 +16,8 @@ GameMenu::GameMenu(float x, float y, string windowName)
 	i_amount = 1;
 	gracz = 1;
 	vecChoices = {};
+	punkty_gracz_1=0;
+	punkty_gracz_2=0;
 }
 
 
@@ -166,11 +168,31 @@ void GameMenu::setUpMenu()
 				mod = 3;
 			}
 
+			// uruchamia sie w momecie klikniecia na plansze
 			else if (mod == 3 && vecChoices[0] == 1 && e.type == sf::Event::MouseButtonReleased && e.mouseButton.button == sf::Mouse::Left) {
 				plansza_3->wstaw(e.mouseButton.x, e.mouseButton.y, gracz);
+				if (vecChoices[1] == 4 && gracz == 1)gracz = 2;
+				else if (vecChoices[1] == 4 && gracz == 2)gracz = 1;
+				
+				cout << plansza_3->checkIfWin();
+
+				if (plansza_3->checkIfWin() != 0) {						//koniec tury
+					if (plansza_3->checkIfWin() == 1)punkty_gracz_1++;						
+					if (plansza_3->checkIfWin() == 2)punkty_gracz_2++;
+					plansza_3->newGame();
+				}
 			}
-			else if (mod == 3 && vecChoices[0] == 2 && e.type == sf::Event::MouseButtonReleased && e.mouseButton.button == sf::Mouse::Left) {
+			else if (mod == 3 && vecChoices[0] == 2 && e.type == sf:: Event::MouseButtonReleased && e.mouseButton.button == sf::Mouse::Left) {
 				plansza_5->wstaw(e.mouseButton.x, e.mouseButton.y, gracz);
+				if (vecChoices[1] == 4 && gracz == 1)gracz = 2;
+				else if (vecChoices[1] == 4 && gracz == 2)gracz = 1;
+
+				cout << plansza_5->checkIfWin();
+				if (plansza_5->checkIfWin() != 0) {						//koniec tury
+					if (plansza_5->checkIfWin() == 1)punkty_gracz_1++;
+					if (plansza_5->checkIfWin() == 2)punkty_gracz_2++;
+					plansza_5->newGame();
+				}
 			}
 
 

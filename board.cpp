@@ -57,15 +57,7 @@ void Board::wstaw(int x, int y, int kto) {// 1-kolko    2-krzyzyk
 					if (tab_score[licznik] == 0)
 					{
 						cout << "kliknieto na " << licznik << " kwadrat";
-						
-						if (kto == 1) {
 							tab_score[licznik] = kto;
-						}
-						if (kto == 2) {
-							tab_score[licznik] = kto;
-						}
-					
-
 					}
 					break;
 				}
@@ -86,14 +78,14 @@ void Board::rysuj_x_o() {
 
 	for (int i = 0; i < rozmiar; i++)
 	{
-		for (int j = 0; j < rozmiar; j++)
+		for (int j = 0; j < rozmiar; j++)																		//rysuje kolko lub krzyzyk dla miejsc tablicy nie bedacych zerami
 		{
 			if (tab_score[licznik] == 1) {
 				Texts shapeo = Texts(L"O", "fonts/PressStart2P-Regular.ttf", 40, x_aktualny, y_aktualny);
 				window->draw(shapeo.text);
 			}
 			if (tab_score[licznik] == 2) {
-				Texts shapex = Texts(L"x", "fonts/PressStart2P-Regular.ttf", 40, x_aktualny, y_aktualny);
+				Texts shapex = Texts(L"x", "fonts/PressStart2P-Regular.ttf", 50, x_aktualny-5, y_aktualny-10);
 				window->draw(shapex.text);
 			}
 			x_aktualny += 80;
@@ -124,23 +116,23 @@ int Board::checkIfWin()
 
 		for (int i = 0; i < rozmiar * rozmiar; i += 3)
 		{
-			if (tab_score[i] == tab_score[i + 1] && tab_score[i] == tab_score[i + 2])
-				return 1;
+			if (tab_score[i] == tab_score[i + 1] && tab_score[i] == tab_score[i + 2] && tab_score[i]!=0)
+				return tab_score[i];
 		}
 		for (int i = 0; i < rozmiar; i++)
 		{
 
 			/*Sprawdza elementy w kolejnych kolumnach czy s¹ takie same.*/
-			if (tab_score[i] == tab_score[i + 3] && tab_score[i] == tab_score[i + 6])
+			if (tab_score[i] == tab_score[i + 3] && tab_score[i] == tab_score[i + 6] && tab_score[i] != 0)
 				return 1;
 			if (i == 0)
 			{	/*Sprawdza po ukosie czy elementy s¹ takie same.*/
-				if (tab_score[i] == tab_score[i + 4] && tab_score[i] == tab_score[i + 8])
-					return 1;
+				if (tab_score[i] == tab_score[i + 4] && tab_score[i] == tab_score[i + 8] && tab_score[i] != 0)
+					return tab_score[i];
 			}
 			else if (i == 2)
-					if (tab_score[i] == tab_score[i + 2] && tab_score[i] == tab_score[i + 4])
-						return 1;
+				if (tab_score[i] == tab_score[i + 2] && tab_score[i] == tab_score[i + 4] && tab_score[i] != 0)
+					return tab_score[i];
 		}
 	}
 
@@ -149,39 +141,78 @@ int Board::checkIfWin()
 		/*Sprawdza elementy w kolejnych wierszach czy s¹ takie same.*/
 		for (int i = 0; i < rozmiar * rozmiar; i += 5)
 		{
-			if (tab_score[i] == tab_score[i + 1] && tab_score[i] == tab_score[i + 2] && tab_score[i] == tab_score[i + 3] && tab_score[i] == tab_score[i + 4])
-				return 1;
+			if (tab_score[i] == tab_score[i + 1] && tab_score[i] == tab_score[i + 2] && tab_score[i] == tab_score[i + 3] && tab_score[i] != 0)
+				return tab_score[i];
+			i++;
+			/*if (tab_score[i+1] == tab_score[i + 2] && tab_score[i+1] == tab_score[i + 3] && tab_score[i+1] == tab_score[i + 4] && tab_score[i+1] != 0)
+				return tab_score[i];*/
+			if (tab_score[i] == tab_score[i + 1] && tab_score[i] == tab_score[i + 2] && tab_score[i] == tab_score[i + 3] && tab_score[i] != 0)
+				return tab_score[i];
+			i--;
 		}
 
 		/*Sprawdza elementy w kolejnych kolumnach czy s¹ takie same.*/
 		for (int i = 0; i < rozmiar; i++)
 		{
-			if (tab_score[i] == tab_score[i + 5] && tab_score[i] == tab_score[i + 10] && tab_score[i] == tab_score[i + 15] && tab_score[i] == tab_score[i + 20])
-				return 1;
+			if (tab_score[i] == tab_score[i + 5] && tab_score[i] == tab_score[i + 10] && tab_score[i] == tab_score[i + 15] && tab_score[i] != 0)
+				return tab_score[i];
+
+			i+=5;
+			if (tab_score[i] == tab_score[i + 5] && tab_score[i] == tab_score[i + 10] && tab_score[i] == tab_score[i + 15] && tab_score[i] != 0)
+				return tab_score[i];
+			i -= 5;
+		/*	if (tab_score[i+5] == tab_score[i + 10] && tab_score[i+5] == tab_score[i + 15] && tab_score[i+5] == tab_score[i + 20] &&  tab_score[i+5] != 0)
+				return tab_score[i];*/
 		}
 
 		/*Sprawdza po ukosie czy elementy s¹ takie same.*/
-		for(int i=0;i<rozmiar;i+=4) 
+		int i = 0;
+		while (i<8)
 		{
-			if (i == 0)
-			{
-				if (tab_score[i] == tab_score[i + 6] && tab_score[i] == tab_score[i + 12] && tab_score[i] == tab_score[i + 18] && tab_score[i] == tab_score[i + 24])
-					return 1;
+			if (tab_score[i] == tab_score[i + 6] && tab_score[i]==tab_score[i + 12] && tab_score[i] == tab_score[i+18] && tab_score[i] != 0)return tab_score[i];
+			i++;
+			if (tab_score[i] == tab_score[i + 6] && tab_score[i] == tab_score[i + 12] && tab_score[i] == tab_score[i+18] && tab_score[i] != 0)return tab_score[i];
+			i = i + 4;
+		}
+		i = 3;
+		while (i<11)
+		{
+			if (tab_score[i] == tab_score[i + 4] && tab_score[i] == tab_score[i + 8] && tab_score[i] == tab_score[i+ 12] && tab_score[i] != 0){
+				cout << "wygrana przez ukos";
+				return tab_score[i];
 			}
-			else if (i == 4)
-					if (tab_score[i] == tab_score[i + 4] && tab_score[i] == tab_score[i + 8] && tab_score[i] == tab_score[i + 12] && tab_score[i] == tab_score[i + 16])
-						return 1;
+			i++;
+			if (tab_score[i] == tab_score[i + 4] && tab_score[i] == tab_score[i + 8] && tab_score[i] == tab_score[i +12] && tab_score[i] != 0){
+				cout << "wygrana przez ukos";
+				return tab_score[i];
+			}
+			i = i + 3;
 		}
 	}
-	/*Rozwi¹zanie do remisu.*/
-	for (int i = 0; i < rozmiar * rozmiar; i++)
+	/*Rozwizanie do remisu.*/
+	bool checkRemis = 1;
+	for (int j = 0; j < rozmiar*rozmiar; j++)
 	{
-		if (tab_score[i] != 0)
-			return 2;
-		else
-			return 0;
+		if (tab_score[j] == 0)
+		{
+			checkRemis = false;
+		}
+	}
+	if (checkRemis) {
+		return 3;
+	}
+	else {
+		return 0;
 	}
 }
+void Board::newGame() {
+	for (int i = 0; i < rozmiar*rozmiar; i++)
+	{
+		tab_score[i] = 0;							//czyszczenie planszy po kazdej rozgrywce
+	}
+}
+
+
 Board::~Board() {
 	delete[] tab;
 	delete[] tab_score;
