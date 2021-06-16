@@ -2,6 +2,7 @@
 #include<iostream>
 #include <SFML/Window.hpp>
 #include "menu.h"
+#include "bot.h"
 #include <SFML/Graphics.hpp>
 
 using namespace std;
@@ -20,6 +21,10 @@ public:
 	void newGame();
 
 	~Board();
+
+	friend class Easy;
+	friend class Medium;
+	friend class Advanced;
 
 private:
 	RenderWindow* window;

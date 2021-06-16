@@ -9,6 +9,7 @@
 using namespace std;
 using namespace sf;
 
+class Board;
 
 class Bot
 {
