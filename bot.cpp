@@ -13,9 +13,9 @@ int losowa_liczba(int a, int b)
 }
 
 
-Easy::Easy(Board* p)
+Easy::Easy(Board& p)
 {
-	
+	plansza = &p;
 }
 
 Easy::~Easy()
@@ -45,9 +45,9 @@ void Easy::dodaj_losowo_wartosc()
 
 }
 
-Medium::Medium(Board* plansza)
+Medium::Medium(Board& p)
 {
-	
+	plansza = &p;
 }
 
 Medium::~Medium()
@@ -134,9 +134,9 @@ void Medium::wykonaj_ruch()
 	//TODO:Czy w przypadku dodania wartości 2 z rzędu on będzie próbowaał blokować?
 	//TODO: CHYBA WYSTARCZY SAMO plansza->tab_score[sprawdz_czy_wygram()] =2;
 }
-Advanced::Advanced(Board* plansza)
+Advanced::Advanced(Board& p)
 {
-	
+	plansza = &p;
 }
 
 Advanced::~Advanced()
