@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include"board.h"
 #include "menu.h"
+#include"bot.h"
 
 using namespace std;
 using namespace sf;
@@ -16,22 +17,22 @@ GameMenu::GameMenu(float x, float y, string windowName)
 	i_amount = 1;
 	gracz = 1;
 	vecChoices = {};
-	punkty_gracz_1=0;
-	punkty_gracz_2=0;
+	punkty_gracz_1 = 0;
+	punkty_gracz_2 = 0;
 }
 
 
 
 void GameMenu::setUpMenu()
 {
-	
-	//Strona g≥Ûwna gry
-	Texts o_x = Texts(L"O_X", "fonts/PressStart2P-Regular.ttf", 60, 315, 100);	//O_X na kaødej stronie
+
+	//Strona g¬≥√≥wna gry
+	Texts o_x = Texts(L"O_X", "fonts/PressStart2P-Regular.ttf", 60, 315, 100);	//O_X na ka¬ødej stronie
 	Texts startButton = Texts(L"Start", "fonts/PressStart2P-Regular.ttf", 42, 300, 240);
 	Texts instructionButton = Texts(L"Instrukcja", "fonts/PressStart2P-Regular.ttf", 42, 220, 330);
 
 	//Strona instrukcji
-	wstring instruction = L"ZASADY GRY\nGracze obejmujπ pola na przemian dπøπc do objÍcia trzech pÛl w jednej linii,\nprzy jednoczesnym uniemoøliwieniu tego samego przeciwnikowi.\nPole moøe byÊ objÍte przez jednego gracza i\nnie zmienia swego w≥aúciciela przez ca≥y przebieg gry.\n\nJAK GRA∆?\n Po pierwsze wybierz planszÍ:\n\n3x3\n5x5\n\n nastÍpnie wybierz swojego przeciwnika:\n\n-£atwy\n-åredni\n-Zaawansowany\n-Ze znajomym\n\nKoÒcowo wybierz iloúÊ rozgrywek wybierajπc odpowiedniπ liczbÍ.\n\nI najwaøniejsze pamiÍtaj o dobrej zabawie.";
+	wstring instruction = L"ZASADY GRY\nGracze obejmuj¬π pola na przemian d¬π¬ø¬πc do obj√™cia trzech p√≥l w jednej linii,\nprzy jednoczesnym uniemo¬øliwieniu tego samego przeciwnikowi.\nPole mo¬øe by√¶ obj√™te przez jednego gracza i\nnie zmienia swego w¬≥a≈ìciciela przez ca¬≥y przebieg gry.\n\nJAK GRA√Ü?\n Po pierwsze wybierz plansz√™:\n\n3x3\n5x5\n\n nast√™pnie wybierz swojego przeciwnika:\n\n-¬£atwy\n-≈íredni\n-Zaawansowany\n-Ze znajomym\n\nKo√±cowo wybierz ilo≈ì√¶ rozgrywek wybieraj¬πc odpowiedni¬π liczb√™.\n\nI najwa¬øniejsze pami√™taj o dobrej zabawie.";
 	Texts instructionText = Texts(instruction, "fonts/Quicksand-VariableFont_wght.ttf", 16, 100, 160);
 
 	//Strony wybory trybu gry
@@ -40,8 +41,8 @@ void GameMenu::setUpMenu()
 	Texts fiveXfive = Texts(L"5 x 5", "fonts/PressStart2P-Regular.ttf", 32, 360, 310);
 
 	Texts chooseGameMode = Texts(L"TRYB GRY", "fonts/PressStart2P-Regular.ttf", 40, 280, 150);
-	Texts easy = Texts(L"≥atwy", "fonts/PressStart2P-Regular.ttf", 32, 340, 220);
-	Texts medium = Texts(L"úredni", "fonts/PressStart2P-Regular.ttf", 32, 335, 270);
+	Texts easy = Texts(L"¬≥atwy", "fonts/PressStart2P-Regular.ttf", 32, 340, 220);
+	Texts medium = Texts(L"≈ìredni", "fonts/PressStart2P-Regular.ttf", 32, 335, 270);
 	Texts advanced = Texts(L"trudny", "fonts/PressStart2P-Regular.ttf", 32, 335, 320);
 	Texts withAFriend = Texts(L"Ze znajomym", "fonts/PressStart2P-Regular.ttf", 32, 280, 370);
 
@@ -49,11 +50,11 @@ void GameMenu::setUpMenu()
 	wstring w_amount = to_wstring(i_amount);
 	Texts amountOfGames = Texts(w_amount, "fonts/PressStart2P-Regular.ttf", 38, 405, 295);
 
-	//Przycisk powiÍkszenia i pomniejszenia wartoúci
+	//Przycisk powi√™kszenia i pomniejszenia warto≈ìci
 	Sprites amountButtonsUp = Sprites("buttonAmountUp.png", 375, 220, true/*rozmiar 50X100*/);
 	Sprites amountButtonsDown = Sprites("buttonAmountDown.png", 375, 345, true/*rozmiar 50X100*/);
 
-	//KÛ≥ko i krzyøyk do gry
+	//K√≥¬≥ko i krzy¬øyk do gry
 	Texts o_sign = Texts(L"O", "fonts/PressStart2P-Regular.ttf", 40, 310, 150);
 	Texts x_sign = Texts(L"x", "fonts/PressStart2P-Regular.ttf", 40, 310, 150);
 
@@ -67,13 +68,22 @@ void GameMenu::setUpMenu()
 	window->setVerticalSyncEnabled(true);
 
 	//Stworzenie plansz
-	Board* plansza_5 = new Board(window, 5);		
+	Board* plansza_5 = new Board(window, 5);
 	Board* plansza_3 = new Board(window, 3);
 
-	//G≥Ûwna pÍtla gry
+	//Stworzenie obiekt√≥w tryb√≥w gry
+	Bot e_plansza_3 = Bot(*plansza_3, 1);
+	Bot m_plansza_3 = Bot(*plansza_3, 2);
+	Bot a_plansza_3 = Bot(*plansza_3, 3);
+	
+	Bot e_plansza_5 = Bot(*plansza_5, 1);
+	Bot m_plansza_5 = Bot(*plansza_5, 2);
+	Bot a_plansza_5 = Bot(*plansza_5, 3);
+
+	//G¬≥√≥wna p√™tla gry
 	while (window->isOpen())
 	{
-		
+
 		Event e;
 
 		while (window->pollEvent(e))
@@ -85,40 +95,40 @@ void GameMenu::setUpMenu()
 				window->close();
 			}
 
-			//PowrÛt do strony g≥Ûwnej
+			//Powr√≥t do strony g¬≥√≥wnej
 			if (!(mod == 0) && e.type == sf::Event::MouseButtonReleased && e.mouseButton.button == sf::Mouse::Left && e.mouseButton.x < 800 && e.mouseButton.x > 740 && e.mouseButton.y > 0 && e.mouseButton.y < 40)
 			{
 
 				if ((mod == 2 && choiceMode == 1) || mod == 1 || mod == 3)
 				{
-					mod=0;
+					mod = 0;
 					choiceMode = 1;
 					vecChoices.clear();
 				}
-				else if ((mod == 2 && choiceMode == 2)||(mod == 2 && choiceMode==3))
+				else if ((mod == 2 && choiceMode == 2) || (mod == 2 && choiceMode == 3))
 				{
-					mod=2;
+					mod = 2;
 					choiceMode--;
 					vecChoices.pop_back();
 
 				}
-				
+
 			}
 
 
 
 			if (mod == 0 && e.type == sf::Event::MouseButtonReleased && e.mouseButton.button == sf::Mouse::Left && e.mouseButton.x < 640 && e.mouseButton.x > 210 && e.mouseButton.y > 320 && e.mouseButton.y < 364)
 			{
-				//Przej≈õcie do instrukcji.
+				//Przej√Ö‚Ä∫cie do instrukcji.
 				mod = 1;
 			}
 			else if (mod == 0 && e.type == sf::Event::MouseButtonReleased && e.mouseButton.button == sf::Mouse::Left && e.mouseButton.x < 510 && e.mouseButton.x > 290 && e.mouseButton.y < 300 && e.mouseButton.y > 230)
 			{
-				//Przej≈õcie do wyboru trybu gry.
+				//Przej√Ö‚Ä∫cie do wyboru trybu gry.
 				mod = 2;
 			}
 
-			//wybÛr trybu gr 3x3 albo 5x5
+			//wyb√≥r trybu gr 3x3 albo 5x5
 			else if (mod == 2 && choiceMode == 1 && e.type == sf::Event::MouseButtonReleased && e.mouseButton.button == sf::Mouse::Left && e.mouseButton.x < 560 && e.mouseButton.x > 360 && e.mouseButton.y > 248 && e.mouseButton.y < 285)
 			{
 				vecChoices.push_back(static_cast<int>(GameBoard::threexthree));
@@ -130,7 +140,7 @@ void GameMenu::setUpMenu()
 				vecChoices.push_back(static_cast<int>(GameBoard::fivexfive));
 				choiceMode = 2;
 			}
-			//wybor poziomu trudnoúci lub czy z innym graczem 
+			//wybor poziomu trudno≈ìci lub czy z innym graczem 
 			else if (mod == 2 && choiceMode == 2 && e.type == sf::Event::MouseButtonReleased && e.mouseButton.button == sf::Mouse::Left && e.mouseButton.x < 500 && e.mouseButton.x > 330 && e.mouseButton.y < 255 && e.mouseButton.y > 215)
 			{
 				vecChoices.push_back(static_cast<int>(GameMode::easy));
@@ -173,16 +183,19 @@ void GameMenu::setUpMenu()
 				plansza_3->wstaw(e.mouseButton.x, e.mouseButton.y, gracz);
 				if (vecChoices[1] == 4 && gracz == 1)gracz = 2;
 				else if (vecChoices[1] == 4 && gracz == 2)gracz = 1;
-				
+				else if (vecChoices[1] == 1) e_plansza_3.dodaj_losowo_wartosc();
+				else if (vecChoices[1] == 2) m_plansza_3.wykonaj_ruch();
+				else if (vecChoices[1] == 3) a_plansza_3.wykonaj_ruch();
+			
 				cout << plansza_3->checkIfWin();
 
 				if (plansza_3->checkIfWin() != 0) {						//koniec tury
-					if (plansza_3->checkIfWin() == 1)punkty_gracz_1++;						
+					if (plansza_3->checkIfWin() == 1)punkty_gracz_1++;
 					if (plansza_3->checkIfWin() == 2)punkty_gracz_2++;
 					plansza_3->newGame();
 				}
 			}
-			else if (mod == 3 && vecChoices[0] == 2 && e.type == sf:: Event::MouseButtonReleased && e.mouseButton.button == sf::Mouse::Left) {
+			else if (mod == 3 && vecChoices[0] == 2 && e.type == sf::Event::MouseButtonReleased && e.mouseButton.button == sf::Mouse::Left) {
 				plansza_5->wstaw(e.mouseButton.x, e.mouseButton.y, gracz);
 				if (vecChoices[1] == 4 && gracz == 1)gracz = 2;
 				else if (vecChoices[1] == 4 && gracz == 2)gracz = 1;
@@ -197,14 +210,14 @@ void GameMenu::setUpMenu()
 
 
 
-			//TODO: przycisk powrotu, mo¬øe ma¬≥e menu po najechaniu si√™ wysietla? przyciski wyboru gry bo rozpierdala to powoli.
+			//TODO: przycisk powrotu, mo√Ç¬øe ma√Ç¬≥e menu po najechaniu si√É¬™ wysietla? przyciski wyboru gry bo rozpierdala to powoli.
 		}
 
 
 
 		window->clear(sf::Color(0, 0, 0));
-		//TODO: Do osobnej funkjci to strzeliÊ by trzeba by≥o.
-		//Ustawia Start napis dla rÛznych ekranÛw.
+		//TODO: Do osobnej funkjci to strzeli√¶ by trzeba by¬≥o.
+		//Ustawia Start napis dla r√≥znych ekran√≥w.
 		if (mod == 2)
 		{
 			startButton.text.setScale(sf::Vector2f(0.85f, 0.85f));
@@ -218,7 +231,7 @@ void GameMenu::setUpMenu()
 
 		switch (mod)
 		{
-			//G¬≥√≥wne menu gry
+			//G√Ç¬≥√É¬≥wne menu gry
 		case 0:
 			window->draw(o_x.text);
 			window->draw(startButton.text);
@@ -231,7 +244,7 @@ void GameMenu::setUpMenu()
 			window->draw(goBackButton.text);
 
 			break;
-			//Wyb√≥r trybu gry
+			//Wyb√É¬≥r trybu gry
 		case 2:
 		{
 			switch (choiceMode)
@@ -259,14 +272,14 @@ void GameMenu::setUpMenu()
 				w_amount = to_wstring(i_amount);
 				amountOfGames.text.setString(w_amount);
 
-				//Ustawienie liczby rozgrywek w oknie w zaleønoúci od iloúci cyfr.
+				//Ustawienie liczby rozgrywek w oknie w zale¬øno≈ìci od ilo≈ìci cyfr.
 				if (i_amount > 9)
 					amountOfGames.text.setPosition(sf::Vector2f(390, 295));
 				else
 					amountOfGames.text.setPosition(sf::Vector2f(405, 295));
-					
+
 				window->draw(amountOfGames.text);
-				
+
 				if (i_amount == 1)
 					window->draw(amountButtonsUp.sprite);
 				else if (i_amount == 15)
@@ -314,7 +327,7 @@ GameMenu::~GameMenu()
 {
 	delete window;
 }
-Sprites::Sprites(string textureName, float x, float y,bool button)
+Sprites::Sprites(string textureName, float x, float y, bool button)
 {
 	//Ustawienie pozycji sprite.
 	if (!setUpSprite(textureName))
@@ -334,13 +347,13 @@ bool Sprites::setUpSprite(string textureName)
 {
 	if (!texture.loadFromFile(textureName))
 		return 0;
-	texture.setSmooth(true);	//Wyg≥adza brzegi
+	texture.setSmooth(true);	//Wyg¬≥adza brzegi
 	sprite.setTexture(texture);
 	return true;
 
 }
 
-Texts::Texts(wstring line,string fontfilename,int charactersize, float x, float y)
+Texts::Texts(wstring line, string fontfilename, int charactersize, float x, float y)
 {
 	if (!setUpText(fontfilename))
 		return;
