@@ -28,7 +28,7 @@ class Easy :public Bot
 	Board* plansza;
 
 public:
-	Easy(Board*);
+	Easy(Board&);
 	virtual ~Easy();
 
 	bool czy_pole_puste(int i);
@@ -43,7 +43,7 @@ class Medium :public Bot
 	Board* plansza;
 	
 public:
-	Medium(Board*);
+	Medium(Board&);
 	virtual ~Medium();
 
 	bool czy_pole_puste(int i);
@@ -60,7 +60,7 @@ class Advanced :public Bot
 	
 
 public:
-	Advanced(Board*);
+	Advanced(Board&);
 	virtual ~Advanced();
 
 	bool czy_pole_puste(int i);
