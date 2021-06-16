@@ -12,28 +12,27 @@ int losowa_liczba(int a, int b)
 	return distribution(generator);
 }
 
-
-Easy::Easy(Board& p)
+Bot::Bot(Board& p, int tryb)
 {
+	tryb_gry = tryb;
 	plansza = &p;
 }
 
-Easy::~Easy()
+Bot::~Bot()
 {
 	delete plansza;
 }
 
-
-bool Easy::czy_pole_puste(int i)
+bool Bot::czy_pole_puste(int i)
 {
 	if (plansza->tab_score[i] == 0)
 		return true;
 	return false;
 }
 
-void Easy::dodaj_losowo_wartosc()
+void Bot::dodaj_losowo_wartosc()
 {
-	
+
 	int i{};
 
 	do {
@@ -41,58 +40,64 @@ void Easy::dodaj_losowo_wartosc()
 	} while (!czy_pole_puste(i));
 
 	plansza->tab_score[i] = 2;
-	
-
 }
+//TODO:Zaprzyjaźnić funkcję z vecchoices??
 
-Medium::Medium(Board& p)
+int Bot::sprawdz_czy_wygram()
 {
-	plansza = &p;
-}
-
-Medium::~Medium()
-{
-	delete plansza;
-}
-
-
-bool Medium::czy_pole_puste(int i)
-{
-	if (plansza->tab_score[i] == 0)
-		return true;
-	return false;
-}
-
-int Medium::sprawdz_czy_wygram()
-{
-	
-	//Sprawdza czy pododaniu danego elementu wygra jeśli tak to go dodaje jeśli nie to blokuje ruchy przeciwnika
-	for (int i = 0; i < plansza->rozmiar * plansza->rozmiar; i++)
+	if (tryb_gry == 2)
 	{
-		if (czy_pole_puste(i))
+		//Sprawdza czy pododaniu danego elementu wygra jeśli tak to go dodaje jeśli nie to blokuje ruchy przeciwnika
+		for (int i = 0; i < plansza->rozmiar * plansza->rozmiar; i++)
 		{
-			plansza->tab_score[i] = 2;
-
-			if (plansza->checkIfWin() == 2)
+			if (czy_pole_puste(i))
 			{
-				return i;
-			}
-			else
-			{
-				plansza->tab_score[i] = 0;
+				plansza->tab_score[i] = 2;
 
+				if (plansza->checkIfWin() == 2)
+				{
+					return i;
+				}
+				else
+				{
+					plansza->tab_score[i] = 0;
+
+				}
 			}
 		}
-	}
 
-	return dodaj_losowo_wartosc_optymalniej();
-	//TODO: czy takie zwrócenie elementu  jest poprawne?
+		return dodaj_losowo_wartosc_optymalniej();
+		//TODO: czy takie zwrócenie elementu  jest poprawne?
+	}
+	else if (tryb_gry == 3)
+	{
+		//Sprawdza czy pododaniu danego elementu wygra jeśli tak to go dodaje jeśli nie to blokuje ruchy przeciwnika
+		for (int i = 0; i < plansza->rozmiar * plansza->rozmiar; i++)
+		{
+			if (czy_pole_puste(i))
+			{
+				plansza->tab_score[i] = 2;
+
+				if (plansza->checkIfWin() == 2)
+				{
+					return i;
+				}
+				else
+				{
+					plansza->tab_score[i] = 0;
+
+				}
+			}
+		}
+
+		return sprawdz_czy_zablokuje();
+	}
 
 
 
 }
 
-int Medium::dodaj_losowo_wartosc_optymalniej()
+int Bot::dodaj_losowo_wartosc_optymalniej()
 {
 	int i{};
 	if (plansza->rozmiar == 3)
@@ -116,68 +121,33 @@ int Medium::dodaj_losowo_wartosc_optymalniej()
 	}
 }
 	
-void Medium::wykonaj_ruch()
+void Bot::wykonaj_ruch()
 {
-	bool checkIfNew = 1;
-	for (int i = 0; i < plansza->rozmiar * plansza->rozmiar; i++)
+	if (tryb_gry == 2)
 	{
-		if (plansza->tab_score[i] != 0)
+		bool checkIfNew = 1;
+		for (int i = 0; i < plansza->rozmiar * plansza->rozmiar; i++)
 		{
-			checkIfNew = false;
+			if (plansza->tab_score[i] != 0)
+			{
+				checkIfNew = false;
+			}
 		}
-	}
 
-	if (checkIfNew)
-		plansza->tab_score[dodaj_losowo_wartosc_optymalniej()] = 2;
-	else
+		if (checkIfNew)
+			plansza->tab_score[dodaj_losowo_wartosc_optymalniej()] = 2;
+		else
+			plansza->tab_score[sprawdz_czy_wygram()] = 2;
+		//TODO:Czy w przypadku dodania wartości 2 z rzędu on będzie próbowaał blokować?
+		//TODO: CHYBA WYSTARCZY SAMO plansza->tab_score[sprawdz_czy_wygram()] =2;
+	}
+	else if (tryb_gry == 3)
+	{
 		plansza->tab_score[sprawdz_czy_wygram()] = 2;
-	//TODO:Czy w przypadku dodania wartości 2 z rzędu on będzie próbowaał blokować?
-	//TODO: CHYBA WYSTARCZY SAMO plansza->tab_score[sprawdz_czy_wygram()] =2;
-}
-Advanced::Advanced(Board& p)
-{
-	plansza = &p;
-}
-
-Advanced::~Advanced()
-{
-	delete plansza;
-}
-
-bool Advanced::czy_pole_puste(int i)
-{
-	if (plansza->tab_score[i] == 0)
-		return true;
-	return false;
-}
-
-//Zwraca indeks w tabeli, który mamy wypełnić.
-int Advanced::sprawdz_czy_wygram()
-{
-
-	//Sprawdza czy pododaniu danego elementu wygra jeśli tak to go dodaje jeśli nie to blokuje ruchy przeciwnika
-	for (int i = 0; i < plansza->rozmiar * plansza->rozmiar; i++)
-	{
-		if (czy_pole_puste(i))
-		{
-			plansza->tab_score[i] = 2;
-				
-			if (plansza->checkIfWin() == 2)
-			{
-				return i;
-			}
-			else
-			{
-				plansza->tab_score[i] = 0;
-					
-			}
-		}
 	}
-
-	return sprawdz_czy_zablokuje();
 }
 
-int Advanced::sprawdz_czy_zablokuje()
+int Bot::sprawdz_czy_zablokuje()
 {
 	//Sprawdza elementy przeciwnika czy sa obok siebie jeśli tak dodaje własną wartość, aby uniemożliwić wygraną przeciwnika.
 	for (int i = 0; i < plansza->rozmiar * plansza->rozmiar; i++)
@@ -198,32 +168,4 @@ int Advanced::sprawdz_czy_zablokuje()
 	}
 
 	return dodaj_losowo_wartosc_optymalniej();
-}
-
-int Advanced::dodaj_losowo_wartosc_optymalniej()
-{
-	int i{};
-	if(plansza->rozmiar == 3)
-	{
-		
-		do {
-			i = losowa_liczba(0, (plansza->rozmiar * plansza->rozmiar-1));
-		} while (i % 2 != 0 || !czy_pole_puste(i));
-
-		return i;
-	}
-	else if (plansza->rozmiar == 5)
-	{
-		do {
-			i = losowa_liczba(0, (plansza->rozmiar * plansza->rozmiar-1));
-		} while (!czy_pole_puste(i));
-
-		return i;
-	}
-}
-
-void Advanced::wykonaj_ruch()
-{
-	plansza->tab_score[sprawdz_czy_wygram()] = 2;
-
 }
