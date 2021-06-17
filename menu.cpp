@@ -193,7 +193,7 @@ void GameMenu::setUpMenu()
 
 				if (vecChoices[1] == 4 && gracz == 1)gracz = 2;
 				else if (vecChoices[1] == 4 && gracz == 2)gracz = 1;
-				else if (vecChoices[1] == 1) e_plansza_3.dodaj_losowo_wartosc();
+				else if (vecChoices[1] == 1) e_plansza_3.wykonaj_ruch();
 				else if (vecChoices[1] == 2) m_plansza_3.wykonaj_ruch();
 				else if (vecChoices[1] == 3) a_plansza_3.wykonaj_ruch();
 			
@@ -220,7 +220,7 @@ void GameMenu::setUpMenu()
 
 				if (vecChoices[1] == 4 && gracz == 1)gracz = 2;
 				else if (vecChoices[1] == 4 && gracz == 2)gracz = 1;
-				else if (vecChoices[1] == 1) e_plansza_5.dodaj_losowo_wartosc();
+				else if (vecChoices[1] == 1) e_plansza_5.wykonaj_ruch();
 				else if (vecChoices[1] == 2) m_plansza_5.wykonaj_ruch();
 				else if (vecChoices[1] == 3) a_plansza_5.wykonaj_ruch();
 				
