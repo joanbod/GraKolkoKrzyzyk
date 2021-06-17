@@ -225,4 +225,6 @@ Board::~Board() {
 	tab = nullptr;
 	delete[] tab_score;
 	tab_score = nullptr;
+	delete window;
+	window = nullptr;
 }
