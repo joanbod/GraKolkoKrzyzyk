@@ -193,6 +193,7 @@ void GameMenu::setUpMenu()
 						cout << "gracz nr1 ma " << punkty_gracz_1;
 						cout << "gracz nr2 ma " << punkty_gracz_2;
 						plansza_3.newGame();
+						vecChoices[2]--;
 					}
 
 					if (vecChoices[1] == 4 && gracz == 1)gracz = 2;
@@ -209,26 +210,39 @@ void GameMenu::setUpMenu()
 						cout << "gracz nr1 ma " << punkty_gracz_1;
 						cout << "gracz nr2 ma " << punkty_gracz_2;
 						plansza_3.newGame();
+						vecChoices[2]--;
 					}
 				}
 			}
 			else if (mod == 3 && vecChoices[0] == 2 && e.type == sf::Event::MouseButtonReleased && e.mouseButton.button == sf::Mouse::Left) {
 				if (plansza_5.wstaw(e.mouseButton.x, e.mouseButton.y, gracz)) {
-					if (vecChoices[1] == 4 && gracz == 1)gracz = 2;
-					else if (vecChoices[1] == 4 && gracz == 2)gracz = 1;
-
-					cout << plansza_5.checkIfWin();
 					if (plansza_5.checkIfWin() != 0) {						//koniec tury
-						if (plansza_5.checkIfWin() == 1)punkty_gracz_1++;
-						if (plansza_5.checkIfWin() == 2)punkty_gracz_2++;
-						plansza_5.newGame();
-					}
+					if (plansza_5.checkIfWin() == 1)punkty_gracz_1++;
+					if (plansza_5.checkIfWin() == 2)punkty_gracz_2++;
+					
+					plansza_5.newGame();
+					vecChoices[2]--;
+				}
+
+				if (vecChoices[1] == 4 && gracz == 1)gracz = 2;
+				else if (vecChoices[1] == 4 && gracz == 2)gracz = 1;
+				else if (vecChoices[1] == 1) e_plansza_5.wykonaj_ruch();
+				else if (vecChoices[1] == 2) m_plansza_5.wykonaj_ruch();
+				else if (vecChoices[1] == 3) a_plansza_5.wykonaj_ruch();
+
+				cout << plansza_5.checkIfWin();
+				if (plansza_5.checkIfWin() != 0) {						//koniec tury
+					if (plansza_5.checkIfWin() == 1)punkty_gracz_1++;
+					if (plansza_5.checkIfWin() == 2)punkty_gracz_2++;
+					plansza_5.newGame();
+					
+					vecChoices[2]--;
+				}
 				}
 			}
 
 
 
-			//TODO: przycisk powrotu, moÂ¿e maÂ³e menu po najechaniu siÃª wysietla? przyciski wyboru gry bo rozpierdala to powoli.
 		}
 
 
@@ -319,14 +333,24 @@ void GameMenu::setUpMenu()
 		//Gra
 		case 3:
 
-			if (vecChoices[0] == 1) {
+			if (vecChoices[0] == 1 && vecChoices[2] > 0) {
 				plansza_3.rysuj(punkty_gracz_1,punkty_gracz_2);
 				plansza_3.rysuj_x_o();
 			}
-			if (vecChoices[0] == 2) {
+			else if (vecChoices[0] == 2  && vecChoices[2] > 0) {
 				plansza_5.rysuj(punkty_gracz_1, punkty_gracz_2);
 				plansza_5.rysuj_x_o();
 			}
+			else if (vecChoices[2] == 0)
+			{
+				
+				mod = 4;
+			}
+			window->draw(goBackButton.text);
+			break;
+		case 4:
+			//TODO: Stworyć obiekt koniec gry
+			cout << "Koniec gry!" << endl;
 			window->draw(goBackButton.text);
 			break;
 		default:
