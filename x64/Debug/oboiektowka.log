@@ -2,8 +2,8 @@
 C:\Users\wobro\source\repos\projekt_sobota\board.cpp(28,18): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
 C:\Users\wobro\source\repos\projekt_sobota\board.cpp(28,15): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
 C:\Users\wobro\source\repos\projekt_sobota\board.cpp(41,80): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
-C:\Users\wobro\source\repos\projekt_sobota\board.cpp(91,82): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
-C:\Users\wobro\source\repos\projekt_sobota\board.cpp(91,70): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
-C:\Users\wobro\source\repos\projekt_sobota\board.cpp(95,94): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
-C:\Users\wobro\source\repos\projekt_sobota\board.cpp(95,80): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\wobro\source\repos\projekt_sobota\board.cpp(93,82): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\wobro\source\repos\projekt_sobota\board.cpp(93,70): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\wobro\source\repos\projekt_sobota\board.cpp(97,94): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+C:\Users\wobro\source\repos\projekt_sobota\board.cpp(97,80): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
   oboiektowka.vcxproj -> C:\Users\wobro\Source\Repos\projekt_sobota\x64\Debug\oboiektowka.exe

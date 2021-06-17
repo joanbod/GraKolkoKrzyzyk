@@ -17,7 +17,7 @@ public:
 
 	/*Sprawdza czy ktoœ wygra³.*/
 	int checkIfWin();
-	void wstaw(int x, int y, int kto);   // 1-kolko    2-krzyzyk
+	bool wstaw(int x, int y, int kto);   // 1-kolko    2-krzyzyk
 	void newGame();
 
 	virtual ~Board();

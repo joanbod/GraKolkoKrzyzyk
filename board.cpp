@@ -43,7 +43,7 @@ void Board::rysuj(int punkty_gracz_1, int punkty_gracz_2) {
 	window->draw(napis1.text);
 }
 
-void Board::wstaw(int x, int y, int kto) {// 1-kolko    2-krzyzyk
+bool Board::wstaw(int x, int y, int kto) {// 1-kolko    2-krzyzyk
 
 	int x_koniec = x_poczatek + 80 * rozmiar;
 	int y_koniec = y_poczatek + 80 * rozmiar;
@@ -65,6 +65,7 @@ void Board::wstaw(int x, int y, int kto) {// 1-kolko    2-krzyzyk
 					{
 						cout << "kliknieto na " << licznik << " kwadrat";
 							tab_score[licznik] = kto;
+							return true;
 					}
 					break;
 				}
@@ -75,6 +76,7 @@ void Board::wstaw(int x, int y, int kto) {// 1-kolko    2-krzyzyk
 			y_aktualny += 80;
 		}
 	}
+	return false;
 }
 
 
