@@ -20,7 +20,7 @@ public:
 	void wstaw(int x, int y, int kto);   // 1-kolko    2-krzyzyk
 	void newGame();
 
-	 ~Board();
+	virtual ~Board();
 
 	friend class Bot;
 

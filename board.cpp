@@ -222,5 +222,7 @@ void Board::newGame() {
 
 Board::~Board() {
 	delete[] tab;
+	tab = nullptr;
 	delete[] tab_score;
+	tab_score = nullptr;
 }

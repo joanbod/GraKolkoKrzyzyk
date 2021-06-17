@@ -21,6 +21,7 @@ Bot::Bot(Board& p, int tryb)
  Bot::~Bot()
 {
 	delete plansza;
+	plansza = nullptr;
 }
 
 bool Bot::czy_pole_puste(int i)

@@ -68,17 +68,17 @@ void GameMenu::setUpMenu()
 	window->setVerticalSyncEnabled(true);
 
 	//Stworzenie plansz
-	Board* plansza_5 = new Board(window, 5);
-	Board* plansza_3 = new Board(window, 3);
+	Board plansza_5=Board(window, 5);
+	Board plansza_3=Board(window, 3);
 
 	//Stworzenie obiektów trybów gry
-	Bot e_plansza_3 = Bot(*plansza_3, 1);
-	Bot m_plansza_3 = Bot(*plansza_3, 2);
-	Bot a_plansza_3 = Bot(*plansza_3, 3);
+	Bot e_plansza_3 = Bot(plansza_3, 1);
+	Bot m_plansza_3 = Bot(plansza_3, 2);
+	Bot a_plansza_3 = Bot(plansza_3, 3);
 	
-	Bot e_plansza_5 = Bot(*plansza_5, 1);
-	Bot m_plansza_5 = Bot(*plansza_5, 2);
-	Bot a_plansza_5 = Bot(*plansza_5, 3);
+	Bot e_plansza_5 = Bot(plansza_5, 1);
+	Bot m_plansza_5 = Bot(plansza_5, 2);
+	Bot a_plansza_5 = Bot(plansza_5, 3);
 
 	//G³ówna pêtla gry
 	while (window->isOpen())
@@ -104,6 +104,7 @@ void GameMenu::setUpMenu()
 					mod = 0;
 					choiceMode = 1;
 					vecChoices.clear();
+					cout << "powrot";
 				}
 				else if ((mod == 2 && choiceMode == 2) || (mod == 2 && choiceMode == 3))
 				{
@@ -180,33 +181,42 @@ void GameMenu::setUpMenu()
 
 			// uruchamia sie w momecie klikniecia na plansze
 			else if (mod == 3 && vecChoices[0] == 1 && e.type == sf::Event::MouseButtonReleased && e.mouseButton.button == sf::Mouse::Left) {
-				plansza_3->wstaw(e.mouseButton.x, e.mouseButton.y, gracz);
+				plansza_3.wstaw(e.mouseButton.x, e.mouseButton.y, gracz);
+
+				if (plansza_3.checkIfWin() != 0) {						//koniec tury
+					if (plansza_3.checkIfWin() == 1)punkty_gracz_1++;
+					if (plansza_3.checkIfWin() == 2)punkty_gracz_2++;
+					cout << "gracz nr1 ma " << punkty_gracz_1;
+					cout << "gracz nr2 ma " << punkty_gracz_2;
+					plansza_3.newGame();
+				}
+
 				if (vecChoices[1] == 4 && gracz == 1)gracz = 2;
 				else if (vecChoices[1] == 4 && gracz == 2)gracz = 1;
 				else if (vecChoices[1] == 1) e_plansza_3.dodaj_losowo_wartosc();
 				else if (vecChoices[1] == 2) m_plansza_3.wykonaj_ruch();
 				else if (vecChoices[1] == 3) a_plansza_3.wykonaj_ruch();
 			
-				cout << plansza_3->checkIfWin();
+				cout << plansza_3.checkIfWin();
 
-				if (plansza_3->checkIfWin() != 0) {						//koniec tury
-					if (plansza_3->checkIfWin() == 1)punkty_gracz_1++;
-					if (plansza_3->checkIfWin() == 2)punkty_gracz_2++;
+				if (plansza_3.checkIfWin() != 0) {						//koniec tury
+					if (plansza_3.checkIfWin() == 1)punkty_gracz_1++;
+					if (plansza_3.checkIfWin() == 2)punkty_gracz_2++;
 					cout << "gracz nr1 ma " << punkty_gracz_1;
 					cout << "gracz nr2 ma " << punkty_gracz_2;
-					plansza_3->newGame();
+					plansza_3.newGame();
 				}
 			}
 			else if (mod == 3 && vecChoices[0] == 2 && e.type == sf::Event::MouseButtonReleased && e.mouseButton.button == sf::Mouse::Left) {
-				plansza_5->wstaw(e.mouseButton.x, e.mouseButton.y, gracz);
+				plansza_5.wstaw(e.mouseButton.x, e.mouseButton.y, gracz);
 				if (vecChoices[1] == 4 && gracz == 1)gracz = 2;
 				else if (vecChoices[1] == 4 && gracz == 2)gracz = 1;
 
-				cout << plansza_5->checkIfWin();
-				if (plansza_5->checkIfWin() != 0) {						//koniec tury
-					if (plansza_5->checkIfWin() == 1)punkty_gracz_1++;
-					if (plansza_5->checkIfWin() == 2)punkty_gracz_2++;
-					plansza_5->newGame();
+				cout << plansza_5.checkIfWin();
+				if (plansza_5.checkIfWin() != 0) {						//koniec tury
+					if (plansza_5.checkIfWin() == 1)punkty_gracz_1++;
+					if (plansza_5.checkIfWin() == 2)punkty_gracz_2++;
+					plansza_5.newGame();
 				}
 			}
 
@@ -304,12 +314,12 @@ void GameMenu::setUpMenu()
 		case 3:
 
 			if (vecChoices[0] == 1) {
-				plansza_3->rysuj(punkty_gracz_1,punkty_gracz_2);
-				plansza_3->rysuj_x_o();
+				plansza_3.rysuj(punkty_gracz_1,punkty_gracz_2);
+				plansza_3.rysuj_x_o();
 			}
 			if (vecChoices[0] == 2) {
-				plansza_5->rysuj(punkty_gracz_1, punkty_gracz_2);
-				plansza_5->rysuj_x_o();
+				plansza_5.rysuj(punkty_gracz_1, punkty_gracz_2);
+				plansza_5.rysuj_x_o();
 			}
 			window->draw(goBackButton.text);
 			break;
@@ -328,6 +338,7 @@ void GameMenu::setUpMenu()
 GameMenu::~GameMenu()
 {
 	delete window;
+	window = nullptr;
 }
 Sprites::Sprites(string textureName, float x, float y, bool button)
 {
