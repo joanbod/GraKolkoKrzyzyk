@@ -20,7 +20,7 @@ Bot::Bot(Board& p, int tryb)
 
 Bot::~Bot()
 {
-	delete plansza;
+	
 	plansza = nullptr;
 }
 
