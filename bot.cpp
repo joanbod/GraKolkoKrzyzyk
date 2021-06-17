@@ -18,7 +18,7 @@ Bot::Bot(Board& p, int tryb)
 	plansza = &p;
 }
 
- Bot::~Bot()
+Bot::~Bot()
 {
 	delete plansza;
 	plansza = nullptr;
@@ -31,7 +31,7 @@ bool Bot::czy_pole_puste(int i)
 	return false;
 }
 
-void Bot::dodaj_losowo_wartosc()
+int Bot::dodaj_losowo_wartosc()
 {
 
 	int i{};
@@ -40,7 +40,8 @@ void Bot::dodaj_losowo_wartosc()
 		i = losowa_liczba(0, (plansza->rozmiar * plansza->rozmiar - 1));
 	} while (!czy_pole_puste(i));
 
-	plansza->tab_score[i] = 2;
+	return i;
+
 }
 //TODO:Zaprzyjaźnić funkcję z vecchoices??
 
@@ -67,7 +68,7 @@ int Bot::sprawdz_czy_wygram()
 			}
 		}
 
-		return dodaj_losowo_wartosc_optymalniej();
+		return dodaj_losowo_wartosc();
 		//TODO: czy takie zwrócenie elementu  jest poprawne?
 	}
 	else if (tryb_gry == 3)
@@ -100,10 +101,15 @@ int Bot::sprawdz_czy_wygram()
 
 int Bot::dodaj_losowo_wartosc_optymalniej()
 {
+	//TODO: dodaje na środek
 	int i{};
 	if (plansza->rozmiar == 3)
 	{
 		//TODO: możliwe że jak parzyste elementy będą wypełnione to wystąpi błąd, że nie ma co wypełnić??
+		if (czy_pole_puste(4))
+		{
+			return 4;
+		}
 		do {
 			i = losowa_liczba(0, (plansza->rozmiar * plansza->rozmiar - 1));
 		} while (i % 2 != 0 || !czy_pole_puste(i));
@@ -124,17 +130,25 @@ int Bot::dodaj_losowo_wartosc_optymalniej()
 	
 void Bot::wykonaj_ruch()
 {
-	if (tryb_gry == 2)
+	bool checkIfNew = 1;
+	for (int i = 0; i < plansza->rozmiar * plansza->rozmiar; i++)
 	{
-		bool checkIfNew = 1;
-		for (int i = 0; i < plansza->rozmiar * plansza->rozmiar; i++)
+		if (plansza->tab_score[i] != 0)
 		{
-			if (plansza->tab_score[i] != 0)
-			{
-				checkIfNew = false;
-			}
+			checkIfNew = false;
 		}
+	}
+	if (tryb_gry == 1)
+	{
 
+		if (checkIfNew)
+			plansza->tab_score[dodaj_losowo_wartosc_optymalniej()] = 2;
+		else
+			plansza->tab_score[dodaj_losowo_wartosc()] = 2;
+	}
+	else if (tryb_gry == 2)
+	{
+		
 		if (checkIfNew)
 			plansza->tab_score[dodaj_losowo_wartosc_optymalniej()] = 2;
 		else
@@ -144,7 +158,10 @@ void Bot::wykonaj_ruch()
 	}
 	else if (tryb_gry == 3)
 	{
-		plansza->tab_score[sprawdz_czy_wygram()] = 2;
+		if (checkIfNew)
+			plansza->tab_score[dodaj_losowo_wartosc_optymalniej()] = 2;
+		else
+			plansza->tab_score[sprawdz_czy_wygram()] = 2;
 	}
 }
 
@@ -168,5 +185,5 @@ int Bot::sprawdz_czy_zablokuje()
 		}
 	}
 
-	return dodaj_losowo_wartosc_optymalniej();
+	return dodaj_losowo_wartosc();
 }
