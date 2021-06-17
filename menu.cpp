@@ -113,6 +113,10 @@ void GameMenu::setUpMenu()
 					vecChoices.pop_back();
 
 				}
+				plansza_3.newGame();
+				plansza_5.newGame();
+				punkty_gracz_1 = 0;
+				punkty_gracz_2 = 0;
 
 			}
 
