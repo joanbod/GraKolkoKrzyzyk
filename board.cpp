@@ -113,7 +113,7 @@ void Board::rysuj_x_o() {
 
 int Board::checkIfWin()
 {
-	/*W zależności od rozmiaru musza zostac spełnione odpowiednie warunki.
+	/*W zaleÅ¼noÅ›ci od rozmiaru musza zostac speÅ‚nione odpowiednie warunki.
 	result=0; brak dotychczasowej wygranej
 	result =1; wygrana
 	result=2 ; remis
@@ -121,7 +121,7 @@ int Board::checkIfWin()
 	*/
 	if (rozmiar == 3)
 	{
-		/*Sprawdza elementy w kolejnych wierszach czy są takie same.*/
+		/*Sprawdza elementy w kolejnych wierszach czy sÄ… takie same.*/
 
 		for (int i = 0; i < rozmiar * rozmiar; i += 3)
 		{
@@ -131,11 +131,11 @@ int Board::checkIfWin()
 		for (int i = 0; i < rozmiar; i++)
 		{
 
-			/*Sprawdza elementy w kolejnych kolumnach czy s� takie same.*/
+			/*Sprawdza elementy w kolejnych kolumnach czy s¹ takie same.*/
 			if (tab_score[i] == tab_score[i + 3] && tab_score[i] == tab_score[i + 6] && tab_score[i] != 0)
 				return 1;
 			if (i == 0)
-			{	/*Sprawdza po ukosie czy elementy s� takie same.*/
+			{	/*Sprawdza po ukosie czy elementy s¹ takie same.*/
 				if (tab_score[i] == tab_score[i + 4] && tab_score[i] == tab_score[i + 8] && tab_score[i] != 0)
 					return tab_score[i];
 			}
@@ -147,7 +147,7 @@ int Board::checkIfWin()
 
 	else if (rozmiar == 5)
 	{
-		/*Sprawdza elementy w kolejnych wierszach czy s� takie same.*/
+		/*Sprawdza elementy w kolejnych wierszach czy s¹ takie same.*/
 		for (int i = 0; i < rozmiar * rozmiar; i += 5)
 		{
 			if (tab_score[i] == tab_score[i + 1] && tab_score[i] == tab_score[i + 2] && tab_score[i] == tab_score[i + 3] && tab_score[i] != 0)
@@ -160,7 +160,7 @@ int Board::checkIfWin()
 			i--;
 		}
 
-		/*Sprawdza elementy w kolejnych kolumnach czy s� takie same.*/
+		/*Sprawdza elementy w kolejnych kolumnach czy s¹ takie same.*/
 		for (int i = 0; i < rozmiar; i++)
 		{
 			if (tab_score[i] == tab_score[i + 5] && tab_score[i] == tab_score[i + 10] && tab_score[i] == tab_score[i + 15] && tab_score[i] != 0)
@@ -174,7 +174,7 @@ int Board::checkIfWin()
 				return tab_score[i];*/
 		}
 
-		/*Sprawdza po ukosie czy elementy s� takie same.*/
+		/*Sprawdza po ukosie czy elementy s¹ takie same.*/
 		int i = 0;
 		while (i<8)
 		{
@@ -227,6 +227,5 @@ Board::~Board() {
 	tab = nullptr;
 	delete[] tab_score;
 	tab_score = nullptr;
-	delete window;
-	window = nullptr;
+	
 }
