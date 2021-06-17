@@ -65,6 +65,13 @@ void GameMenu::setUpMenu()
 	enum class GameBoard { threexthree = 1, fivexfive = 2 };
 	enum class GameMode { easy = 1, medium = 2, advanced = 3, withAFriend = 4 };
 
+	//Strona końcowa
+	Texts theEnd= Texts(L"Koniec gry!", "fonts/PressStart2P-Regular.ttf", 60, 100, 250);
+	wstring w_x_punkty = to_wstring(punkty_gracz_2);
+	wstring w_o_punkty = to_wstring(punkty_gracz_1);
+	wstring punkty = w_x_punkty + " : " + w_o_punkty;
+	Texts Punkty = Texts(punkty, "fonts/PressStart2P-Regular.ttf", 38, 320, 335);
+
 	window->setVerticalSyncEnabled(true);
 
 	//Stworzenie plansz
@@ -99,7 +106,7 @@ void GameMenu::setUpMenu()
 			if (!(mod == 0) && e.type == sf::Event::MouseButtonReleased && e.mouseButton.button == sf::Mouse::Left && e.mouseButton.x < 800 && e.mouseButton.x > 740 && e.mouseButton.y > 0 && e.mouseButton.y < 40)
 			{
 
-				if ((mod == 2 && choiceMode == 1) || mod == 1 || mod == 3)
+				if ((mod == 2 && choiceMode == 1) || mod == 1 || mod == 3 || mod==4)
 				{
 					mod = 0;
 					choiceMode = 1;
@@ -332,7 +339,8 @@ void GameMenu::setUpMenu()
 		break;
 		//Gra
 		case 3:
-
+		{
+				
 			if (vecChoices[0] == 1 && vecChoices[2] > 0) {
 				plansza_3.rysuj(punkty_gracz_1,punkty_gracz_2);
 				plansza_3.rysuj_x_o();
@@ -347,10 +355,18 @@ void GameMenu::setUpMenu()
 				mod = 4;
 			}
 			window->draw(goBackButton.text);
+		}	
 			break;
 		case 4:
-			//TODO: Stworyć obiekt koniec gry
-			cout << "Koniec gry!" << endl;
+			w_x_punkty = to_wstring(punkty_gracz_2);
+			w_o_punkty = to_wstring(punkty_gracz_1);
+			punkty = w_o_punkty  + " : " + w_x_punkty;
+			Punkty.text.setString(punkty);
+
+
+			window->draw(o_x.text);
+			window->draw(theEnd.text);
+			window->draw(Punkty.text);
 			window->draw(goBackButton.text);
 			break;
 		default:
