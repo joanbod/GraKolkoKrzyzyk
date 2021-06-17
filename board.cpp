@@ -215,6 +215,7 @@ int Board::checkIfWin()
 	}
 }
 void Board::newGame() {
+	
 	for (int i = 0; i < rozmiar*rozmiar; i++)
 	{
 		tab_score[i] = 0;							//czyszczenie planszy po kazdej rozgrywce

@@ -21,6 +21,8 @@ class GameMenu
 	int gracz;
 		int punkty_gracz_1;
 		int punkty_gracz_2;
+		int ktora_tura;
+		int poprzednia_tura;
 	//Wektory odpowiedzialne za zapisanie wyborów gracza
 	vector<int> vecChoices;
 

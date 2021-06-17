@@ -19,6 +19,8 @@ GameMenu::GameMenu(float x, float y, string windowName)
 	vecChoices = {};
 	punkty_gracz_1 = 0;
 	punkty_gracz_2 = 0;
+	ktora_tura = 1;
+	poprzednia_tura = 1;
 }
 
 
@@ -124,6 +126,8 @@ void GameMenu::setUpMenu()
 				plansza_5.newGame();
 				punkty_gracz_1 = 0;
 				punkty_gracz_2 = 0;
+				ktora_tura = 1;
+				poprzednia_tura = 1;
 
 			}
 
@@ -199,15 +203,25 @@ void GameMenu::setUpMenu()
 						if (plansza_3.checkIfWin() == 2)punkty_gracz_2++;
 						cout << "gracz nr1 ma " << punkty_gracz_1;
 						cout << "gracz nr2 ma " << punkty_gracz_2;
+						ktora_tura++;
 						plansza_3.newGame();
 						vecChoices[2]--;
+
+						if (ktora_tura%2==0) {
+						 if (vecChoices[1] == 1) e_plansza_3.wykonaj_ruch();
+						else if (vecChoices[1] == 2) m_plansza_3.wykonaj_ruch();
+						else if (vecChoices[1] == 3) a_plansza_3.wykonaj_ruch();
+						}
 					}
 
-					if (vecChoices[1] == 4 && gracz == 1)gracz = 2;
-					else if (vecChoices[1] == 4 && gracz == 2)gracz = 1;
-					else if (vecChoices[1] == 1) e_plansza_3.wykonaj_ruch();
-					else if (vecChoices[1] == 2) m_plansza_3.wykonaj_ruch();
-					else if (vecChoices[1] == 3) a_plansza_3.wykonaj_ruch();
+					if (ktora_tura == poprzednia_tura) {
+						if (vecChoices[1] == 4 && gracz == 1)gracz = 2;
+						else if (vecChoices[1] == 4 && gracz == 2)gracz = 1;
+						else if (vecChoices[1] == 1) e_plansza_3.wykonaj_ruch();
+						else if (vecChoices[1] == 2) m_plansza_3.wykonaj_ruch();
+						else if (vecChoices[1] == 3) a_plansza_3.wykonaj_ruch();
+					}
+					poprzednia_tura = ktora_tura;
 
 					cout << plansza_3.checkIfWin();
 
@@ -216,8 +230,16 @@ void GameMenu::setUpMenu()
 						if (plansza_3.checkIfWin() == 2)punkty_gracz_2++;
 						cout << "gracz nr1 ma " << punkty_gracz_1;
 						cout << "gracz nr2 ma " << punkty_gracz_2;
+						ktora_tura++;
 						plansza_3.newGame();
 						vecChoices[2]--;
+
+
+						if (ktora_tura % 2 == 0) {
+							if (vecChoices[1] == 1) e_plansza_3.wykonaj_ruch();
+							else if (vecChoices[1] == 2) m_plansza_3.wykonaj_ruch();
+							else if (vecChoices[1] == 3) a_plansza_3.wykonaj_ruch();
+						}
 					}
 				}
 			}
@@ -226,23 +248,35 @@ void GameMenu::setUpMenu()
 					if (plansza_5.checkIfWin() != 0) {						//koniec tury
 					if (plansza_5.checkIfWin() == 1)punkty_gracz_1++;
 					if (plansza_5.checkIfWin() == 2)punkty_gracz_2++;
-					
+					ktora_tura++;
 					plansza_5.newGame();
 					vecChoices[2]--;
+					if (ktora_tura % 2 == 0) {
+					 if (vecChoices[1] == 1) e_plansza_5.wykonaj_ruch();
+					else if (vecChoices[1] == 2) m_plansza_5.wykonaj_ruch();
+					else if (vecChoices[1] == 3) a_plansza_5.wykonaj_ruch();
+					}
 				}
-
-				if (vecChoices[1] == 4 && gracz == 1)gracz = 2;
-				else if (vecChoices[1] == 4 && gracz == 2)gracz = 1;
-				else if (vecChoices[1] == 1) e_plansza_5.wykonaj_ruch();
-				else if (vecChoices[1] == 2) m_plansza_5.wykonaj_ruch();
-				else if (vecChoices[1] == 3) a_plansza_5.wykonaj_ruch();
+					if (ktora_tura == poprzednia_tura) {
+						if (vecChoices[1] == 4 && gracz == 1)gracz = 2;
+						else if (vecChoices[1] == 4 && gracz == 2)gracz = 1;
+						else if (vecChoices[1] == 1) e_plansza_5.wykonaj_ruch();
+						else if (vecChoices[1] == 2) m_plansza_5.wykonaj_ruch();
+						else if (vecChoices[1] == 3) a_plansza_5.wykonaj_ruch();
+					}
+					poprzednia_tura = ktora_tura;
 
 				cout << plansza_5.checkIfWin();
 				if (plansza_5.checkIfWin() != 0) {						//koniec tury
 					if (plansza_5.checkIfWin() == 1)punkty_gracz_1++;
 					if (plansza_5.checkIfWin() == 2)punkty_gracz_2++;
+					ktora_tura++;
 					plansza_5.newGame();
-					
+					if (ktora_tura % 2 == 0) {
+						if (vecChoices[1] == 1) e_plansza_5.wykonaj_ruch();
+						else if (vecChoices[1] == 2) m_plansza_5.wykonaj_ruch();
+						else if (vecChoices[1] == 3) a_plansza_5.wykonaj_ruch();
+					}
 					vecChoices[2]--;
 				}
 				}
