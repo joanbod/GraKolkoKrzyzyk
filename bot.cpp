@@ -69,7 +69,7 @@ int Bot::sprawdz_czy_wygram()
 		}
 
 		return dodaj_losowo_wartosc();
-		//TODO: czy takie zwrócenie elementu  jest poprawne?
+		
 	}
 	else if (tryb_gry == 3)
 	{
@@ -101,11 +101,11 @@ int Bot::sprawdz_czy_wygram()
 
 int Bot::dodaj_losowo_wartosc_optymalniej()
 {
-	//TODO: dodaje na środek
+	//Dodaje na srodek nastepnie na rogi nastepnie losowo
 	int i{};
 	if (plansza->rozmiar == 3)
 	{
-		//TODO: możliwe że jak parzyste elementy będą wypełnione to wystąpi błąd, że nie ma co wypełnić??
+		
 		if (czy_pole_puste(4))
 		{
 			return 4;
@@ -153,8 +153,7 @@ void Bot::wykonaj_ruch()
 			plansza->tab_score[dodaj_losowo_wartosc_optymalniej()] = 2;
 		else
 			plansza->tab_score[sprawdz_czy_wygram()] = 2;
-		//TODO:Czy w przypadku dodania wartości 2 z rzędu on będzie próbowaał blokować?
-		//TODO: CHYBA WYSTARCZY SAMO plansza->tab_score[sprawdz_czy_wygram()] =2;
+		
 	}
 	else if (tryb_gry == 3)
 	{
