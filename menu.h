@@ -13,17 +13,17 @@ class GameMenu
 	//Wymiary okna
 	float x;
 	float y;
-	//Zmienne odpowiedzialne za poruszanie siê po grze
-	int mod;
-	int choiceMode;
-	int i_amount;
-	//zmienne odpowiedzialne za ture gracza i przyznawanie punktow
+	//Zmienne odpowiedzialne za poruszanie sie po grze
+	int mod;	//Ktore okno wyswietla
+	int choiceMode;		//Ktory wybor 
+	int i_amount;		//Ilosc rozgrywek
+	//Zmienne odpowiedzialne za ture gracza i przyznawanie punktow
 	int gracz;
 		int punkty_gracz_1;
 		int punkty_gracz_2;
 		int ktora_tura;
 		int poprzednia_tura;
-	//Wektory odpowiedzialne za zapisanie wyborów gracza
+	//Wektory odpowiedzialne za zapisanie wyborÃ³w gracza
 	vector<int> vecChoices;
 
 public:
