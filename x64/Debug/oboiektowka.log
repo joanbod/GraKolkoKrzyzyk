@@ -6,8 +6,12 @@ C:\Users\wobro\source\repos\projekt_sobota\board.cpp(93,82): warning C4244: "arg
 C:\Users\wobro\source\repos\projekt_sobota\board.cpp(93,70): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
 C:\Users\wobro\source\repos\projekt_sobota\board.cpp(97,94): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
 C:\Users\wobro\source\repos\projekt_sobota\board.cpp(97,80): warning C4244: "argument": konwersja z "int" do "float", możliwa utrata danych
+  bot.cpp
+  main.cpp
   menu.cpp
 C:\Users\wobro\source\repos\projekt_sobota\menu.cpp(14,41): warning C4244: "argument": konwersja z "float" do "unsigned int", możliwa utrata danych
 C:\Users\wobro\source\repos\projekt_sobota\menu.cpp(14,38): warning C4244: "argument": konwersja z "float" do "unsigned int", możliwa utrata danych
   Generowanie kodu...
+C:\Users\wobro\source\repos\projekt_sobota\bot.cpp(100): warning C4715: "Bot::sprawdz_czy_wygram”: niewszystkie ścieżki kodu zwracają wartość
+C:\Users\wobro\source\repos\projekt_sobota\bot.cpp(129): warning C4715: "Bot::dodaj_losowo_wartosc_optymalniej”: niewszystkie ścieżki kodu zwracają wartość
   oboiektowka.vcxproj -> C:\Users\wobro\Source\Repos\projekt_sobota\x64\Debug\oboiektowka.exe

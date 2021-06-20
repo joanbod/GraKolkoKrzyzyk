@@ -113,7 +113,7 @@ void Board::rysuj_x_o() {
 
 int Board::checkIfWin()
 {
-	/*W zaleÅ¼noÅ›ci od rozmiaru musza zostac speÅ‚nione odpowiednie warunki.
+	/*W zaleznosci od rozmiaru musza zostac spelnione odpowiednie warunki.
 	result=0; brak dotychczasowej wygranej
 	result =1; wygrana
 	result=2 ; remis
@@ -121,7 +121,7 @@ int Board::checkIfWin()
 	*/
 	if (rozmiar == 3)
 	{
-		/*Sprawdza elementy w kolejnych wierszach czy sÄ… takie same.*/
+		/*Sprawdza elementy w kolejnych wierszach czy sa takie same.*/
 
 		for (int i = 0; i < rozmiar * rozmiar; i += 3)
 		{
@@ -153,8 +153,6 @@ int Board::checkIfWin()
 			if (tab_score[i] == tab_score[i + 1] && tab_score[i] == tab_score[i + 2] && tab_score[i] == tab_score[i + 3] && tab_score[i] != 0)
 				return tab_score[i];
 			i++;
-			/*if (tab_score[i+1] == tab_score[i + 2] && tab_score[i+1] == tab_score[i + 3] && tab_score[i+1] == tab_score[i + 4] && tab_score[i+1] != 0)
-				return tab_score[i];*/
 			if (tab_score[i] == tab_score[i + 1] && tab_score[i] == tab_score[i + 2] && tab_score[i] == tab_score[i + 3] && tab_score[i] != 0)
 				return tab_score[i];
 			i--;
@@ -171,7 +169,7 @@ int Board::checkIfWin()
 				return tab_score[i];
 			i -= 5;
 		/*	if (tab_score[i+5] == tab_score[i + 10] && tab_score[i+5] == tab_score[i + 15] && tab_score[i+5] == tab_score[i + 20] &&  tab_score[i+5] != 0)
-				return tab_score[i];*/
+				return tab_score[i]; ten warunek nie dziala pomimo ze wyglada tak samo co ten linie wyzej pozostawiony w celu przestrogi oraz edukacji */ 
 		}
 
 		/*Sprawdza po ukosie czy elementy s¹ takie same.*/

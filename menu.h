@@ -27,7 +27,7 @@ class GameMenu
 	vector<int> vecChoices;
 
 public:
-	GameMenu(float=800,float=650,string="Okno aplikacji");
+	GameMenu(float=800,float=650,string=("Okno aplikacji"));
 	virtual ~GameMenu();
 
 	void setUpMenu();
