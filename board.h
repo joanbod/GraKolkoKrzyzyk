@@ -17,7 +17,7 @@ public:
 
 	/*Sprawdza czy ktoœ wygra³.*/
 	int checkIfWin(); //sprawdza czy w tablicy tab_score nie znajduja sie 3 lub 4 takie same cyfry na ukos w poziomie lub w wierszach
-	bool wstaw(int x, int y, int kto);   // 1-kolko    2-krzyzyk
+	bool wstaw(int x, int y, int kto);   //funkcja wywo³ywana w momecie klikniecia sprawdza czy bylo ono poprawne oraz wstawia liczbe do tab_score
 	void newGame(); // wype³nia tablice tab_score zerami co skutkuje resetem gry
 
 	virtual ~Board();
