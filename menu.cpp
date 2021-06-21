@@ -28,13 +28,13 @@ GameMenu::GameMenu(float x, float y, string windowName)
 void GameMenu::setUpMenu()
 {
 
-	//Strona g³ówna gry
-	Texts o_x = Texts(L"O_X", "fonts/PressStart2P-Regular.ttf", 60, 315, 100);	//O_X na ka¿dej stronie
+	//Strona główna gry
+	Texts o_x = Texts(L"O_X", "fonts/PressStart2P-Regular.ttf", 60, 315, 100);	
 	Texts startButton = Texts(L"Start", "fonts/PressStart2P-Regular.ttf", 42, 300, 240);
 	Texts instructionButton = Texts(L"Instrukcja", "fonts/PressStart2P-Regular.ttf", 42, 220, 330);
 
 	//Strona instrukcji
-	wstring instruction = L"ZASADY GRY\nGracze obejmuj¹ pola na przemian d¹¿¹c do objêcia trzech pól w jednej linii,\nprzy jednoczesnym uniemo¿liwieniu tego samego przeciwnikowi.\nPole mo¿e byæ objête przez jednego gracza i\nnie zmienia swego w³aœciciela przez ca³y przebieg gry.\n\nJAK GRAÆ?\n Po pierwsze wybierz planszê:\n\n3x3\n5x5\n\n nastêpnie wybierz swojego przeciwnika:\n\n-£atwy\n-Œredni\n-Zaawansowany\n-Ze znajomym\n\nKoñcowo wybierz iloœæ rozgrywek wybieraj¹c odpowiedni¹ liczbê.\n\nI najwa¿niejsze pamiêtaj o dobrej zabawie.";
+	wstring instruction = L"ZASADY GRY\nGracze obejmują pola na przemian dążąc do objęcia trzech pól w trybie 3x3 lub 4 w trybie 5x5 w jednej linii,\nprzy jednoczesnym uniemożliwieniu tego samego przeciwnikowi.\nPole może być objęte przez jednego gracza i\nnie zmienia swego właściciela przez cały przebieg gry.\n\nJAK GRAĆ?\n Po pierwsze wybierz planszę:\n\n3x3\n5x5\n\n następnie wybierz swojego przeciwnika:\n\n-Łatwy\n-Średni\n-Zaawansowany\n-Ze znajomym\n\nKońcowo wybierz ilość rozgrywek wybierając odpowiednią liczbę.\n\nI najważniejsze pamiętaj o dobrej zabawie.";
 	Texts instructionText = Texts(instruction, "fonts/Quicksand-VariableFont_wght.ttf", 16, 100, 160);
 
 	//Strony wybory trybu gry
@@ -43,10 +43,10 @@ void GameMenu::setUpMenu()
 	Texts fiveXfive = Texts(L"5 x 5", "fonts/PressStart2P-Regular.ttf", 32, 360, 310);
 
 	Texts chooseGameMode = Texts(L"TRYB GRY", "fonts/PressStart2P-Regular.ttf", 40, 280, 150);
-	Texts easy = Texts(L"³atwy", "fonts/PressStart2P-Regular.ttf", 32, 340, 220);
-	Texts medium = Texts(L"œredni", "fonts/PressStart2P-Regular.ttf", 32, 335, 270);
+	Texts easy = Texts(L"łatwy", "fonts/PressStart2P-Regular.ttf", 32, 340, 220);
+	Texts medium = Texts(L"średni", "fonts/PressStart2P-Regular.ttf", 32, 335, 270);
 	Texts advanced = Texts(L"trudny", "fonts/PressStart2P-Regular.ttf", 32, 335, 320);
-	Texts withAFriend = Texts(L"Ze znajomym", "fonts/PressStart2P-Regular.ttf", 32, 280, 370);
+	Texts withAFriend = Texts(L"ze znajomym", "fonts/PressStart2P-Regular.ttf", 32, 280, 370);
 
 	Texts chooseAmountOfGames = Texts(L"LICZBA ROZGRYWEK", "fonts/PressStart2P-Regular.ttf", 40, 80, 150);
 	wstring w_amount = to_wstring(i_amount);
@@ -289,7 +289,7 @@ void GameMenu::setUpMenu()
 
 
 		window->clear(sf::Color(0, 0, 0));
-		//TODO: Do osobnej funkjci to strzeliæ by trzeba by³o.
+		
 		//Ustawia Start napis dla róznych ekranów.
 		if (mod == 2)
 		{
@@ -304,7 +304,7 @@ void GameMenu::setUpMenu()
 
 		switch (mod)
 		{
-			//GÂ³Ã³wne menu gry
+			//Główne menu gry
 		case 0:
 			window->draw(o_x.text);
 			window->draw(startButton.text);
@@ -317,7 +317,7 @@ void GameMenu::setUpMenu()
 			window->draw(goBackButton.text);
 
 			break;
-			//WybÃ³r trybu gry
+			//Wybór trybu gry
 		case 2:
 		{
 			switch (choiceMode)
@@ -345,7 +345,7 @@ void GameMenu::setUpMenu()
 				w_amount = to_wstring(i_amount);
 				amountOfGames.text.setString(w_amount);
 
-				//Ustawienie liczby rozgrywek w oknie w zale¿noœci od iloœci cyfr.
+				//Ustawienie liczby rozgrywek w oknie w zależności od ilości cyfr.
 				if (i_amount > 9)
 					amountOfGames.text.setPosition(sf::Vector2f(390, 295));
 				else
@@ -440,7 +440,7 @@ bool Sprites::setUpSprite(string textureName)
 {
 	if (!texture.loadFromFile(textureName))
 		return 0;
-	texture.setSmooth(true);	//Wyg³adza brzegi
+	texture.setSmooth(true);	//Wygładza brzegi
 	sprite.setTexture(texture);
 	return true;
 
