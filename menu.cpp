@@ -34,7 +34,7 @@ void GameMenu::setUpMenu()
 	Texts instructionButton = Texts(L"Instrukcja", "fonts/PressStart2P-Regular.ttf", 42, 220, 330);
 
 	//Strona instrukcji
-	wstring instruction = L"ZASADY GRY\nGracze obejmują pola na przemian dążąc do objęcia trzech pól w trybie 3x3 lub 4 w trybie 5x5 w jednej linii,\nprzy jednoczesnym uniemożliwieniu tego samego przeciwnikowi.\nPole może być objęte przez jednego gracza i\nnie zmienia swego właściciela przez cały przebieg gry.\n\nJAK GRAĆ?\n Po pierwsze wybierz planszę:\n\n3x3\n5x5\n\n następnie wybierz swojego przeciwnika:\n\n-Łatwy\n-Średni\n-Zaawansowany\n-Ze znajomym\n\nKońcowo wybierz ilość rozgrywek wybierając odpowiednią liczbę.\n\nI najważniejsze pamiętaj o dobrej zabawie.";
+	wstring instruction = L"ZASADY GRY\nGracze obejmują pola na przemian dążąc do objęcia \ntrzech pól w trybie 3x3 lub 4 w trybie 5x5 w jednej linii,\nprzy jednoczesnym uniemożliwieniu tego samego przeciwnikowi.\nPole może być objęte przez jednego gracza i\nnie zmienia swego właściciela przez cały przebieg gry.\n\nJAK GRAĆ?\n Po pierwsze wybierz planszę:\n\n3x3\n5x5\n\n następnie wybierz swojego przeciwnika:\n\n-Łatwy\n-Średni\n-Zaawansowany\n-Ze znajomym\n\nKońcowo wybierz ilość rozgrywek wybierając odpowiednią liczbę.\n\nI najważniejsze pamiętaj o dobrej zabawie.";
 	Texts instructionText = Texts(instruction, "fonts/Quicksand-VariableFont_wght.ttf", 16, 100, 160);
 
 	//Strony wybory trybu gry
